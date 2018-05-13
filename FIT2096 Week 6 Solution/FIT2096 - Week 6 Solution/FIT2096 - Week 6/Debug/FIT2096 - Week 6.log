@@ -1,0 +1,59 @@
+﻿  Window.cpp
+  tile.cpp
+  ThirdPersonCamera.cpp
+  TextureManager.cpp
+  TexturedShader.cpp
+  Texture.cpp
+  Testing.cpp
+  Shader.cpp
+  player.cpp
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(46): warning C4305: '-=': truncation from 'double' to 'float'
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(51): warning C4305: '+=': truncation from 'double' to 'float'
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(86): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(95): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(129): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\player.cpp(149): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  monster.cpp
+  MeshManager.cpp
+  Mesh.cpp
+  Main.cpp
+  InputController.cpp
+  GameObject.cpp
+  GameBoard.cpp
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(87): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(112): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(196): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(202): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(202): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(205): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(208): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(209): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(246): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(306): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  FlyingCamera.cpp
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\flyingcamera.cpp(71): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\flyingcamera.cpp(74): warning C4305: '-=': truncation from 'double' to 'float'
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\flyingcamera.cpp(78): warning C4305: '+=': truncation from 'double' to 'float'
+  Direct3D.cpp
+  Camera.cpp
+  Generating Code...
+  Compiling...
+  Button.cpp
+e:\zuoye\2096\ass2\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\button.cpp(36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+DirectXTK_VS2015.lib(CommonStates.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(CommonStates.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(BinaryReader.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(BinaryReader.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(pch.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(pch.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(SimpleMath.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(SimpleMath.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(SpriteBatch.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(SpriteBatch.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(SpriteFont.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(SpriteFont.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(VertexTypes.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(VertexTypes.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+DirectXTK_VS2015.lib(WICTextureLoader.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(WICTextureLoader.obj)' or at 'E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+  FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.exe
+  FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\ass2\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.pdb (Full PDB)
