@@ -115,10 +115,7 @@ void GameBoard::AddWalls()
 	}
 }
 
-void GameBoard::DeactivateTile(int x, int z)
-{
-	m_tiles[z][x]->SetType(TileType::DISABLED);
-}
+
 
 TileType GameBoard::GetTileTypeForPosition(int x, int z)
 {

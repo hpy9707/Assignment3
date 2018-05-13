@@ -48,20 +48,15 @@ TileType Tile::SelectType()
 
 	int roll = MathsHelper::RandomRange(1, 100);
 
-	if (roll < 67)
+	if (roll <= 80)
 		return TileType::NORMAL;
-	else if (roll < 71)
-		return TileType::MONSTER_VAR1;
-	else if (roll < 74)
-		return TileType::MONSTER_VAR2;
-	else if (roll < 78)
-		return TileType::DAMAGE;
-	else if (roll < 80)
-		return TileType::HEALTH;
-	else if (roll < 85)
+	else if (roll > 90)
 		return TileType::TELEPORT;
-	else
-		return TileType::DISABLED;
+	else 
+		return TileType::HEALTH;
+	
+	
+	
 }
 
 Texture* Tile::GetTextureForType(TileType type)
@@ -72,16 +67,11 @@ Texture* Tile::GetTextureForType(TileType type)
 	{
 	case TileType::HEALTH:
 		return m_textureManager->GetTexture("Assets/Textures/tile_green.png");
-	case TileType::DAMAGE:
-		return m_textureManager->GetTexture("Assets/Textures/tile_red1.png");
+	
 	case TileType::TELEPORT:
 		return m_textureManager->GetTexture("Assets/Textures/tile_blue.png");
-	case TileType::DISABLED:
-		return m_textureManager->GetTexture("Assets/Textures/tile_disabled.png");
-	case TileType::MONSTER_VAR1:
-		return m_textureManager->GetTexture("Assets/Textures/tile_red2.png");
-	case TileType::MONSTER_VAR2:
-		return m_textureManager->GetTexture("Assets/Textures/tile_red3.png");
+	
+	
 	case TileType::NORMAL:
 		return m_textureManager->GetTexture("Assets/Textures/tile_white.png");
 	case TileType::WALL:

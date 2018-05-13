@@ -36,73 +36,102 @@ void Player::Update(float timestep)
 {
 	// Constantly step towards target position
 	// Could add a distance check here, however seeing we only have one player we'll be fine
-
 	m_heading += m_input->GetMouseDeltaX() * m_rotationSpeed * timestep;
+	Matrix heading = Matrix::CreateRotationY(m_heading);
+	
+
+	// Transform a world right vector from world space into local space
+	Vector3 localRight = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
+
+	// Essentially our local forward vector but always parallel with the ground
+	// Remember a cross product gives us a vector perpendicular to the two input vectors
+	Vector3 localForwardXZ = localRight.Cross(Vector3(0, 1, 0));
 	
 	
-	if (m_heading > ToRadians(180.0f)) {
-		while (m_heading > PI)
-		{
-			m_heading -= 2 * PI;
-		}
-	}
-	if (m_heading < ToRadians(-180.0f)) {
-		while (m_heading < -PI) {
-			m_heading += 2 * PI;
-		}
-	}
-	Vector3 forward = Getforward(m_heading);
-	Vector3 right = Getright(m_heading);
+	
+	Vector3 right = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
+
+	// Essentially our local forward vector but always parallel with the ground
+	// Remember a cross product gives us a vector perpendicular to the two input vectors
+	Vector3 forward = localRight.Cross(Vector3(0, 1, 0));
 
 	// We need to identify the frame input was received so we can perform common logic
 	// outside of the GetKeyDown IF statements below.
 	bool didJustMove = false;
-
-	if (m_input->GetKeyDown('W'))
+	
+	if (m_input->GetKeyHold('W'))
 	{
 		if (CanMoveHere(m_position + forward))
 		{
 			// Deactivate tile before we update the target position. This prevents the trail
 			// of disabled tiles from getting ahead of the player. It always disables the tile
 			// we are leaving as opposed to disabling the one we are moving onto.
-			m_currentBoard->DeactivateTile(m_position.x, m_position.z);
-			m_position += forward;
+			m_position += forward*m_moveSpeed*timestep;
 			didJustMove = true;
 		}
+		else {
+			Vector3 target_pos = m_position + forward;
+			if (target_pos.x > 15.5) m_position.x = 14.5;
+			if (target_pos.x < 0.5)m_position.x = 0.5;
+			if (target_pos.z > 15.5)m_position.z = 14.5;
+			if (target_pos.z < 0.5)m_position.z = 0.5;
+					}
 	}
-	if (m_input->GetKeyDown('S'))
+	if (m_input->GetKeyHold('S'))
 	{
 		if (CanMoveHere(m_position - forward))
 		{
-			m_currentBoard->DeactivateTile(m_position.x, m_position.z);
-			m_position -=forward ;
+			
+			m_position -=forward*m_moveSpeed*timestep;
 			didJustMove = true;
 		}
+		else {
+			Vector3 target_pos = m_position - forward;
+			if (target_pos.x > 15.5) m_position.x = 14.5;
+			if (target_pos.x < 0.5)m_position.x = 0.5;
+			if (target_pos.z > 15.5)m_position.z = 14.5;
+			if (target_pos.z < 0.5)m_position.z = 0.5;
+		}
+		
 	}
-	if (m_input->GetKeyDown('A'))
+	if (m_input->GetKeyHold('A'))
 	{
 		if (CanMoveHere(m_position - right))
 		{
-			m_currentBoard->DeactivateTile(m_position.x, m_position.z);
-			m_position -= right;
+			
+			m_position -= right*m_moveSpeed*timestep;
 			didJustMove = true;
 		}
+		else {
+			Vector3 target_pos = m_position - right;
+			if (target_pos.x > 15.5) m_position.x = 14.5;
+			if (target_pos.x < 0.5)m_position.x = 0.5;
+			if (target_pos.z > 15.5)m_position.z = 14.5;
+			if (target_pos.z < 0.5)m_position.z = 0.5;
+		}
 	}
-	if (m_input->GetKeyDown('D'))
+	if (m_input->GetKeyHold('D'))
 	{
 		if (CanMoveHere(m_position + right))
 		{
-			m_currentBoard->DeactivateTile(m_position.x, m_position.z);
-			m_position += right;
+			
+			m_position += right*m_moveSpeed*timestep;
 			didJustMove = true;
+		}
+		else {
+			Vector3 target_pos = m_position + right;
+			if (target_pos.x > 15.5) m_position.x = 14.5;
+			if (target_pos.x < 0.5)m_position.x = 0.5;
+			if (target_pos.z > 15.5)m_position.z = 14.5;
+			if (target_pos.z < 0.5)m_position.z = 0.5;
 		}
 	}
 
-	if (didJustMove)
-	{
-		// We want to react once per move (not every frame)
-		FinishTurn();
-	}
+	//if (didJustMove)
+	//{
+	//	// We want to react once per move (not every frame)
+	//	FinishTurn();
+	//}
 }
 
 void Player::FinishTurn()
@@ -111,26 +140,26 @@ void Player::FinishTurn()
 	// is only called the frame we receive input from the keyboard.
 
 	// React to tile we're standing on
-	ReactToTile();
-	CheckIfTrapped();
+	//ReactToTile();
+	//CheckIfTrapped();
 
 	// Decrease moves remaining
 	
 
 	// Show health visually as scale of player mesh
-	SetUniformScale(m_health / 100.0f);
+	//SetUniformScale(m_health / 100.0f);
 }
 
 bool Player::CanMoveHere(Vector3 target)
 {
 	// Asks the GameBoard for the type of the target tile
 	// We can't step onto a wall or a disabled tile
-
-	TileType targetTileType = m_currentBoard->GetTileTypeForPosition(target.x, target.z);
-
-	return targetTileType != TileType::DISABLED &&
-		targetTileType != TileType::WALL &&
-		targetTileType != TileType::INVALID;
+	float x = target.x;
+	float z = target.z;
+	if (x < 0.5 || x>15.5 || z > 15.5 || z < 0.5) {
+		return false;
+	}
+	return true;
 }
 
 void Player::CheckIfTrapped()
@@ -235,49 +264,3 @@ void Player::DoMonsterBattle()
 	}
 }
 
-Vector3 Player::Getforward(float heading)
-{
-	Vector3 forward;
-	//look back
-	if (heading < ToRadians(-135.0f)) {
-		forward = Vector3(0, 0, -1);
-	}//look left
-	else if (heading < ToRadians(-45.0f)) {
-		forward = Vector3(-1, 0, 0);
-	}//look front
-	else if (heading < ToRadians(45.0f)) {
-		forward = Vector3(0, 0, 1);
-	}//look right
-	else if (heading < ToRadians(135.0f)) {
-		forward = Vector3(1, 0, 0);
-	}//reamaing part still look back
-	else
-	{
-		forward = Vector3(0, 0, -1);
-	}
-
-	return forward;
-}
-
-Vector3 Player::Getright(float heading)
-{
-	Vector3 right;
-	//look back
-	if (heading < ToRadians(-135.0f)) {
-		right = Vector3(-1, 0, 0);
-	}//look left
-	else if (heading < ToRadians(-45.0f)) {
-		right = Vector3(0, 0, 1);
-	}//look front
-	else if (heading < ToRadians(45.0f)) {
-		right = Vector3(1, 0, 0);
-	}//look right
-	else if (heading < ToRadians(135.0f)) {
-		right = Vector3(0, 0, -1);
-	}//reamaing part still look back
-	else
-	{
-		right = Vector3(-1, 0, 0);
-	}
-	return right;
-}

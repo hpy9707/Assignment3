@@ -188,13 +188,7 @@ void Game::InitGameWorld()
 	for (int x = 0; x < 16; x++) {
 		for (int z = 0; z < 16; z++)
 		{
-			if (m_gameboard->GetTileTypeForPosition(x, z) == TileType::MONSTER_VAR1 || m_gameboard->GetTileTypeForPosition(x, z) == TileType::MONSTER_VAR2)
-			{
-				m_monsterMesh.push_back(new Testing(m_meshManager->GetMesh("Assets/Meshes/enemy.obj"),
-					m_diffuseTexturedShader, 
-					m_textureManager->GetTexture("Assets/Textures/tile_red3.png"),
-					Vector3(x,0,z)));
-			}
+			
 			if (m_gameboard->GetTileTypeForPosition(x, z) == TileType::HEALTH ){
 				m_capsuleMesh.push_back(new StaticObject(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
 					m_diffuseTexturedShader,
@@ -202,14 +196,28 @@ void Game::InitGameWorld()
 					Vector3(x, 0.25, z-0.25)));
 			}
 		}
-		for (int i = 0; i <m_monsterMesh.size(); i++) {
-			m_monsterMesh[i]->SetUniformScale(0.5f);
-		}
+		
 		for (int i = 0; i <m_capsuleMesh.size(); i++) {
 			m_capsuleMesh[i]->SetXRotation(ToRadians(90.0f));
 			m_capsuleMesh[i]->SetUniformScale(0.5f);
 		}
+	} int x;
+	int z;
+	for (int i = 1; i <= 5; i++) {
+		do {
+			 x = 2 + rand() % 12;
+			 z = 2 + rand() % 12;
+		} while (m_gameboard->GetTileTypeForPosition(x, z) != TileType::NORMAL);
+
+		m_monsterMesh.push_back(new Testing(m_meshManager->GetMesh("Assets/Meshes/enemy.obj"),
+			m_diffuseTexturedShader,
+			m_textureManager->GetTexture("Assets/Textures/tile_red3.png"),
+			Vector3(x, 0, z)));
 	}
+	for (int i = 0; i <m_monsterMesh.size(); i++) {
+		m_monsterMesh[i]->SetUniformScale(0.5f);
+	}
+	
 
 }
 

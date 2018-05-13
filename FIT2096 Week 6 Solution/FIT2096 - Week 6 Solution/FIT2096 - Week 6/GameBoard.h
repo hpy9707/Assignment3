@@ -30,7 +30,7 @@ public:
 	void Update(float timestep);
 	void Render(Direct3D* renderer, Camera* camera);
 
-	void DeactivateTile(int x, int z);
+	
 	TileType GetTileTypeForPosition(int x, int z);
 	Tile* GetRandomTileOfType(TileType type);
 

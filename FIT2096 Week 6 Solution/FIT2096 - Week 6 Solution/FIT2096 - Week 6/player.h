@@ -58,8 +58,7 @@ private:
 	int Attack();
 	void BeHit(int amount);
 	void DoMonsterBattle();
-	Vector3 Getforward(float heading);
-	Vector3 Getright(float heading);
+
 public:
 	Player();
 	Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board);
