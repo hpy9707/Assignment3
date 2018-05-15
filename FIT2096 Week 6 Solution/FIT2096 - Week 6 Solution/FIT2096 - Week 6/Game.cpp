@@ -165,15 +165,15 @@ void Game::RefreshUI()
 
 		m_distanceTravelledText = ss.str();
 	}
-	if(!m_player->getmonsterAlive())
-	{
-		std::wstringstream ss;
+	//if(!m_player->getmonsterAlive())
+	//{
+	//	std::wstringstream ss;
 
-		// Round to two decimal places for neater output
-		ss << "You kill the monster! " ;
+	//	// Round to two decimal places for neater output
+	//	ss << "You kill the monster! " ;
 
-		m_monsterkilled = ss.str();
-	}
+	//	m_monsterkilled = ss.str();
+	//}
 	
 }
 
@@ -324,11 +324,11 @@ void Game::checkgameover()
 		msg = "You've run out of health.";
 	}
 	
-	else if (m_player->GetIsTrapped())
+	/*else if (m_player->GetIsTrapped())
 	{
 		msg = "You're trapped.";
 	}
-
+*/
 	if (msg != "")
 	{
 		std::stringstream ss;

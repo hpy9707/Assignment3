@@ -55,7 +55,7 @@ FlyingCamera::FlyingCamera(InputController* input, Vector3 startPos)
 
 	m_moveSpeed = 10.0f;
 	m_heightChangeSpeed = 10.0f;
-	m_rotationSpeed = 0.75f;
+	m_rotationSpeed = 0.50f;
 
 	m_heading = 0.0f;
 	m_pitch = 0.0f;

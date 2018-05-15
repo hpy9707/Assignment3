@@ -65,6 +65,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="bulletManger.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Direct3D.cpp" />
@@ -72,6 +74,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="gun.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -88,6 +91,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
+    <ClInclude Include="bulletManger.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Direct3D.h" />
@@ -100,6 +105,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="gun.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Testing.h" />

@@ -33,31 +33,31 @@ private:
 	float m_health;
 	int m_score;
 	int m_monstersDefeated;
-	bool m_isTrapped;
+	//bool m_isTrapped;
 	
 	float m_heading;
 	
 	float m_rotationSpeed;
-	Monster* m_monster;
+	//Monster* m_monster;
 	// Ask the GameBoard if we are allowed to move to a particular tile
 	bool CanMoveHere(Vector3 target);
-
+	void resetpos(Vector3 target_pos);
 	// Check if surrounding cells are walkable
-	void CheckIfTrapped();
+	//void CheckIfTrapped();
 
 	// Housekeeping after we receive input
-	void FinishTurn();
+	//void FinishTurn();
 
 	// Check what type of tile is beneth us and react
-	void ReactToTile();
+	//void ReactToTile();
 
 	// Used to spawn the player in a random position and teleport between blue tiles
 	void TeleportToTileOfType(TileType type);
 
 	// For Monster battles
-	int Attack();
+	//int Attack();
 	void BeHit(int amount);
-	void DoMonsterBattle();
+	//void DoMonsterBattle();
 
 public:
 	Player();
@@ -67,13 +67,14 @@ public:
 	void Update(float timestep);
 
 	// The Game class will use these to determine if the game should end
-	bool GetIsTrapped() { return m_isTrapped; }
+//	bool GetIsTrapped() { return m_isTrapped; }
 	float GetHealth() { return m_health; }
-	bool getmonsterAlive() { return m_monster->IsAlive(); }
+	//bool getmonsterAlive() { return m_monster->IsAlive(); }
 
 	// Game will use these to output info to the player
 	int GetNumberOfMonstersDefeated() { return m_monstersDefeated; }
 	int GetScore() { return m_score; }
+	
 };
 
 #endif
