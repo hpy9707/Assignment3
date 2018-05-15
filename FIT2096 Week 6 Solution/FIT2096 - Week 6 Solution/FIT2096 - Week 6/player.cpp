@@ -27,7 +27,7 @@ Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* in
 	m_score = 0;
 	m_monstersDefeated = 0;
 	TeleportToTileOfType(TileType::NORMAL);
-	m_gun = new Gun(bulletmanager, 20, 5.0f, 0.2f);
+	m_gun = new Gun(bulletmanager, 30, 5.0f, 0.2f);
 }
 
 Player::~Player() {
@@ -43,10 +43,10 @@ void Player::Update(float timestep)
 	// Constantly step towards target position
 	// Could add a distance check here, however seeing we only have one player we'll be fine
 	m_heading += m_input->GetMouseDeltaX() * m_rotationSpeed * timestep;
-	m_pitch+= m_input->GetMouseDeltaY() * m_rotationSpeed * timestep;
+	m_pitch += m_input->GetMouseDeltaY() * m_rotationSpeed * timestep;
 	Matrix heading = Matrix::CreateRotationY(m_heading);
 	Matrix pitch = Matrix::CreateRotationX(m_pitch);
-	
+
 	Matrix lookAtRotation = pitch * heading;
 	// Transform a world right vector from world space into local space
 	Vector3 localRight = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
@@ -54,20 +54,20 @@ void Player::Update(float timestep)
 	// Essentially our local forward vector but always parallel with the ground
 	// Remember a cross product gives us a vector perpendicular to the two input vectors
 	Vector3 localForwardXZ = localRight.Cross(Vector3(0, 1, 0));
-	
-	
-	
+
+
+
 	Vector3 right = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
 
 	// Essentially our local forward vector but always parallel with the ground
 	// Remember a cross product gives us a vector perpendicular to the two input vectors
 	Vector3 forward = localRight.Cross(Vector3(0, 1, 0));
-	
+
 	Vector3 target = Vector3::TransformNormal(Vector3(0, 0, 1), lookAtRotation);
 	// We need to identify the frame input was received so we can perform common logic
 	// outside of the GetKeyDown IF statements below.
-	
-	
+
+
 	if (m_input->GetKeyHold('W'))
 	{
 		if (CanMoveHere(m_position + forward))
@@ -76,32 +76,32 @@ void Player::Update(float timestep)
 			// of disabled tiles from getting ahead of the player. It always disables the tile
 			// we are leaving as opposed to disabling the one we are moving onto.
 			m_position += forward*m_moveSpeed*timestep;
-			
+
 		}
 		else {
 			resetpos(m_position + forward);
-					}
+		}
 	}
 	if (m_input->GetKeyHold('S'))
 	{
 		if (CanMoveHere(m_position - forward))
 		{
-			
-			m_position -=forward*m_moveSpeed*timestep;
-			
+
+			m_position -= forward*m_moveSpeed*timestep;
+
 		}
 		else {
 			resetpos(m_position - forward);
 		}
-		
+
 	}
 	if (m_input->GetKeyHold('A'))
 	{
 		if (CanMoveHere(m_position - right))
 		{
-			
+
 			m_position -= right*m_moveSpeed*timestep;
-			
+
 		}
 		else {
 			resetpos(m_position - right);
@@ -111,18 +111,27 @@ void Player::Update(float timestep)
 	{
 		if (CanMoveHere(m_position + right))
 		{
-			
+
 			m_position += right*m_moveSpeed*timestep;
-			
+
 		}
 		else {
 			resetpos(m_position + right);
 		}
 	}
-	if (m_input->GetMouseDown(LEFT_MOUSE)) {
-		Vector3 bulletPosition = m_position + Vector3(0, 0.5f, 0) + target;
-		m_gun->Shoot(bulletPosition, target);
+	if (m_input->GetKeyDown('R')) {
+		if (m_gun->GetMagazineCapacity() > 0) {
+			m_gun->setReload(true);
+			m_gun->setFire(false);
+		}
 	}
+	if (m_input->GetMouseDown(LEFT_MOUSE)) {
+		if (m_gun->getFire()) {
+			Vector3 bulletPosition = m_position + Vector3(0, 0.5f, 0) + target;
+			m_gun->Shoot(bulletPosition, target);
+		}
+	}
+
 	//if (didJustMove)
 	//{
 	//	// We want to react once per move (not every frame)

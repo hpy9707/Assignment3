@@ -11,6 +11,7 @@ Gun::Gun(BulletManager * bulletManager, int clipsCapacity, float reloadTime, flo
 	m_fireTimer = m_fireFrequency;
 	m_magazineCapacity = 100;
 	m_startReloading = false;
+	m_fire = true;
 }
 
 Gun::~Gun()
@@ -53,7 +54,11 @@ void Gun::Update(float timestep)
 	if (m_magazineCapacity == 0)
 		m_startReloading = false;
 	else if (m_currentClips == 0 && m_magazineCapacity != 0)
+	{
 		m_startReloading = true;
+		m_fire = false;
+	}
+
 
 
 	if (m_startReloading) {
@@ -61,6 +66,7 @@ void Gun::Update(float timestep)
 			Reloading();
 			m_currentReloading = m_reloadTime;
 			m_startReloading = false;
+			m_fire = true;
 		}
 		else {
 			m_currentReloading -= timestep;

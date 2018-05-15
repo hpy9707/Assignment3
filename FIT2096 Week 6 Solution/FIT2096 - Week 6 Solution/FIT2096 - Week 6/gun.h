@@ -17,6 +17,7 @@ private:
 	float m_fireTimer;
 
 	bool m_startReloading;
+	bool m_fire;
 
 public:
 	Gun(BulletManager* bulletManager, int clipsCapacity, float reloadTime, float fireFrequency);
@@ -26,9 +27,13 @@ public:
 	void Reloading();
 	void Update(float timestep);
 
+	bool getFire() { return m_fire; }
+	bool getreload() { return m_startReloading; }
 	int GetMagazineCapacity() { return m_magazineCapacity; }
 	int GetCurrentClip() { return m_currentClips; }
 	void SetMagazineCapacity(int newCapacity);
+	void setReload(bool state) { m_startReloading = state; }
+	void setFire(bool fire) { m_fire = fire; }
 };
 
 

@@ -68,6 +68,7 @@ public:
 	int GetScore() { return m_score; }
 	int GetPlayerClip();
 	int GetPlayerMagazine();
+	bool getreload() { return m_gun->getreload(); }
 };
 
 #endif
