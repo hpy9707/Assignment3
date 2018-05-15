@@ -42,7 +42,16 @@ public:
 		else
 			return value;
 	}
-
+	static Matrix FacetoPlayer(Vector3 origin, Vector3 target, Vector3 up) {
+		Vector3 forward = (target - origin);
+		forward.Normalize();
+		Vector3 right = up.Cross(forward);
+		right.Normalize();
+		return Matrix(right.x, right.y, right.z, 0,
+			up.x, up.y, up.z, 0,
+			forward.x, forward.y, forward.z, 0,
+			0, 0, 0, 1);
+	}
 };
 
 #endif

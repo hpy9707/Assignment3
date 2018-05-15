@@ -19,6 +19,7 @@
 #include "Button.h"
 #include "gameboard.h"
 #include "player.h"
+#include"BulletManager.h"
 
 #include "DirectXTK/SpriteBatch.h"
 #include "DirectXTK/SpriteFont.h"
@@ -50,14 +51,15 @@ private:
 	//game objects
 	GameBoard* m_gameboard;
 	Player* m_player;
-	std::vector<Testing*> m_monsterMesh;
+	std::vector<Monster*> m_monsterMesh;
 	std::vector<GameObject*>m_capsuleMesh;
-
+	BulletManager* m_bulletmanager;
 
 	// Wide strings use more than 8 bits per character so they can capture more symbols
 	// Windows loves them and as such so does Direct3D and its text helpers
 	std::wstring m_distanceTravelledText;
 	std::wstring m_monsterkilled;
+	std::wstring m_state;
 
 	Texture* m_currentItemSprite[10];
 

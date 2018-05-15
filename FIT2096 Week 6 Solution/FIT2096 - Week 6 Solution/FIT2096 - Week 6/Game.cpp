@@ -29,6 +29,7 @@ Game::Game()
 	m_button = NULL;
 	m_gameboard = NULL;
 	m_player = NULL;
+	m_bulletmanager = NULL;
 }
 
 Game::~Game() {}
@@ -87,7 +88,8 @@ bool Game::LoadMeshes()
 
 	if (!m_meshManager->Load(m_renderer, "Assets/Meshes/enemy.obj"))
 		return false;
-
+	if (!m_meshManager->Load(m_renderer, "Assets/Meshes/bullet.obj"))
+		return false;
 	return true;
 }
 
@@ -102,14 +104,13 @@ bool Game::LoadTextures()
 	if (!m_textureManager->Load(m_renderer, "Assets/Textures/tile_green.png"))
 		return false;
 
-	if (!m_textureManager->Load(m_renderer, "Assets/Textures/tile_red2.png"))
+	if (!m_textureManager->Load(m_renderer, "Assets/Textures/bullet.png"))
 		return false;
 
 	if (!m_textureManager->Load(m_renderer, "Assets/Textures/tile_red3.png"))
 		return false;
 
-	if (!m_textureManager->Load(m_renderer, "Assets/Textures/tile_red1.png"))
-		return false;
+	
 
 	if (!m_textureManager->Load(m_renderer, "Assets/Textures/tile_white.png"))
 		return false;
@@ -151,7 +152,7 @@ void Game::OnButtonPress()
 }
 
 
-
+ 
 void Game::RefreshUI()
 {
 	// Ensure text in UI matches latest scores etc (call this after data changes)
@@ -165,6 +166,9 @@ void Game::RefreshUI()
 
 		m_distanceTravelledText = ss.str();
 	}
+	std::wstringstream cc;
+	cc << m_player->GetPlayerClip() << " / " << m_player->GetPlayerMagazine();
+	m_state = cc.str();
 	//if(!m_player->getmonsterAlive())
 	//{
 	//	std::wstringstream ss;
@@ -179,12 +183,13 @@ void Game::RefreshUI()
 
 void Game::InitGameWorld()
 {
-	m_gameboard = new GameBoard(m_meshManager, m_textureManager, m_diffuseTexturedShader);
+	m_bulletmanager = new BulletManager(m_meshManager, m_textureManager, m_diffuseTexturedShader);
+			m_gameboard = new GameBoard(m_meshManager, m_textureManager, m_diffuseTexturedShader);
 	m_player = new Player(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
 		m_diffuseTexturedShader,
 		m_textureManager->GetTexture("Assets/Textures/tile_white.png"),
 		m_input,
-		m_gameboard);
+		m_gameboard,m_bulletmanager);
 	for (int x = 0; x < 16; x++) {
 		for (int z = 0; z < 16; z++)
 		{
@@ -209,7 +214,7 @@ void Game::InitGameWorld()
 			 z = 2 + rand() % 12;
 		} while (m_gameboard->GetTileTypeForPosition(x, z) != TileType::NORMAL);
 
-		m_monsterMesh.push_back(new Testing(m_meshManager->GetMesh("Assets/Meshes/enemy.obj"),
+		m_monsterMesh.push_back(new Monster(m_meshManager->GetMesh("Assets/Meshes/enemy.obj"),
 			m_diffuseTexturedShader,
 			m_textureManager->GetTexture("Assets/Textures/tile_red3.png"),
 			Vector3(x, 0, z)));
@@ -224,28 +229,15 @@ void Game::InitGameWorld()
 void Game::Update(float timestep)
 {
 	m_input->BeginUpdate();
-	for (unsigned int i = 0; i < m_monsterMesh.size(); i++)
-	{
-		
-			m_monsterMesh[i]->Update(timestep);
-			if (m_monsterMesh[i]->GetPosition() == m_player->GetPosition()) {
-				Testing* temp;
-				temp = m_monsterMesh[i];
-				 m_monsterMesh[i] =m_monsterMesh[m_monsterMesh.size()-1];
-				  m_monsterMesh[m_monsterMesh.size() - 1] = temp;
-				 m_monsterMesh.pop_back();
-				//delete m_gameObjects[i]; 
-				//m_monsterMesh.erase(m_monsterMesh.begin() + i);
-			}
-			else {
-				m_monsterMesh[i]->LookAt(m_player->GetPosition());
-			}
-		
+	if (m_input->GetKeyDown(VK_ESCAPE)) {
+		PostQuitMessage(0);
+	}
+	m_bulletmanager->Update(timestep);
+	for (unsigned int i = 0; i < m_monsterMesh.size(); i++) {
+		m_monsterMesh[i]->LookAt(m_player->GetPosition());
 	}
 
-	/*for (int i = m_monsterMesh.size() - 1; i >= 0; i--) {
-		if (m_monsterMesh[i] == NULL) { m_monsterMesh.erase(m_monsterMesh.begin() +i); }
-	}*/
+
 	for (unsigned int i = 0; i < m_capsuleMesh.size(); i++) {
 		m_capsuleMesh[i]->Update(timestep);
 		Vector3 actualpos;
@@ -286,6 +278,7 @@ void Game::Render()
 	}
 	m_gameboard->Render(m_renderer, m_currentCam);
 	m_player->Render(m_renderer, m_currentCam);
+	m_bulletmanager->Render(m_renderer, m_currentCam);
 	DrawUI();
 
 	m_renderer->EndScene();		
@@ -307,6 +300,7 @@ void Game::DrawUI()
 	// Let's draw some text over our game
 	m_arialFont18->DrawString(m_spriteBatch, m_distanceTravelledText.c_str(), Vector2(20,40), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0,0));
 	m_arialFont18->DrawString(m_spriteBatch, m_monsterkilled.c_str(), Vector2(20, 60), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0, 0));
+	m_arialFont18->DrawString(m_spriteBatch, m_state.c_str(), Vector2(600, 680), Color(0.0f, 0.0f, 0.0f), 0, Vector2(0, 0));
 	// Here's how we draw a sprite over our game
 	float currHp = m_player->GetHealth();
 	float num_of_bar = ceil(currHp / 10);
@@ -421,5 +415,10 @@ void Game::Shutdown()
 	if (m_player) {
 		delete m_player;
 		m_player = NULL;
+	}
+	if (m_bulletmanager)
+	{
+		delete m_bulletmanager;
+		m_bulletmanager = NULL;
 	}
 }

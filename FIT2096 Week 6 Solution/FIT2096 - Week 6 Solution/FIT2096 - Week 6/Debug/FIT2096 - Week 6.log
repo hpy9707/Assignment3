@@ -1,15 +1,11 @@
-﻿  player.cpp
-  Window.cpp
-  Main.cpp
-  Game.cpp
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(196): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(196): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(200): warning C4018: '<': signed/unsigned mismatch
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(201): warning C4305: 'argument': truncation from 'double' to 'float'
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(215): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(217): warning C4018: '<': signed/unsigned mismatch
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(314): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+﻿  Game.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(201): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(201): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(205): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(206): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(220): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(222): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(246): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(308): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.exe
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.pdb (Full PDB)

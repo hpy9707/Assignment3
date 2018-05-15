@@ -3,6 +3,7 @@
 
 #include "Direct3D.h"
 #include "Mesh.h"
+#include "Collisions.h"
 
 class GameObject
 {

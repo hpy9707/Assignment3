@@ -40,7 +40,10 @@ private:
 
 	bool CreateTriangle(Direct3D* renderer, const char* identifier);
 	bool CreateSquare(Direct3D* renderer, const char* identifier);
-
+	Vector3 m_minVector;	//For our bounding boxes we need to know the min position of the mesh...
+	Vector3 m_maxVector;	//... and the max position
+	Vector3 m_centre;		//For the bounding spheres we need to know the centre point...
+	float m_radius;
 
 public:
 	void Render(Direct3D* renderer, Shader* shader, Matrix world, Camera* cam, Texture* texture);
@@ -49,7 +52,10 @@ public:
 	int GetIndexCount() { return m_indexCount; }
 
 	const char* GetFilename() { return m_filename; }	
-
+	Vector3 GetMin() { return m_minVector; }
+	Vector3 GetMax() { return m_maxVector; }
+	Vector3 GetCentre() { return m_centre; }
+	float GetRadius() { return m_radius; }
 	// The MeshManager can access our private members and functions
 	friend class MeshManager;
 };

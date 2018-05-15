@@ -11,34 +11,43 @@ Player::Player()
 	m_health = 100.0f;
 	m_score = 0;
 	m_monstersDefeated = 0;
+	m_gun = NULL;
 	//m_monster = NULL;
 }
 
-Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board) : GameObject(mesh, shader, texture, Vector3::Zero)
+Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board ,BulletManager* bulletmanager) : GameObject(mesh, shader, texture, Vector3::Zero)
 {
 	m_input = input;
 	m_moveSpeed = 2.5f;
 	m_currentBoard = board;
 	m_heading = 0.0f;
+	m_pitch = 0.0f;
 	m_rotationSpeed = 0.50f;
 	m_health = 100.0f;
 	m_score = 0;
 	m_monstersDefeated = 0;
-	//m_monster = new Monster();
 	TeleportToTileOfType(TileType::NORMAL);
+	m_gun = new Gun(bulletmanager, 20, 5.0f, 0.2f);
 }
 
-Player::~Player() { 
+Player::~Player() {
+	if (m_gun) {
+		delete m_gun;
+		m_gun = NULL;
+	}
 }
 
 void Player::Update(float timestep)
 {
+	m_gun->Update(timestep);
 	// Constantly step towards target position
 	// Could add a distance check here, however seeing we only have one player we'll be fine
 	m_heading += m_input->GetMouseDeltaX() * m_rotationSpeed * timestep;
+	m_pitch+= m_input->GetMouseDeltaY() * m_rotationSpeed * timestep;
 	Matrix heading = Matrix::CreateRotationY(m_heading);
+	Matrix pitch = Matrix::CreateRotationX(m_pitch);
 	
-
+	Matrix lookAtRotation = pitch * heading;
 	// Transform a world right vector from world space into local space
 	Vector3 localRight = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
 
@@ -53,10 +62,11 @@ void Player::Update(float timestep)
 	// Essentially our local forward vector but always parallel with the ground
 	// Remember a cross product gives us a vector perpendicular to the two input vectors
 	Vector3 forward = localRight.Cross(Vector3(0, 1, 0));
-
+	
+	Vector3 target = Vector3::TransformNormal(Vector3(0, 0, 1), lookAtRotation);
 	// We need to identify the frame input was received so we can perform common logic
 	// outside of the GetKeyDown IF statements below.
-	bool didJustMove = false;
+	
 	
 	if (m_input->GetKeyHold('W'))
 	{
@@ -66,7 +76,7 @@ void Player::Update(float timestep)
 			// of disabled tiles from getting ahead of the player. It always disables the tile
 			// we are leaving as opposed to disabling the one we are moving onto.
 			m_position += forward*m_moveSpeed*timestep;
-			didJustMove = true;
+			
 		}
 		else {
 			resetpos(m_position + forward);
@@ -78,7 +88,7 @@ void Player::Update(float timestep)
 		{
 			
 			m_position -=forward*m_moveSpeed*timestep;
-			didJustMove = true;
+			
 		}
 		else {
 			resetpos(m_position - forward);
@@ -91,7 +101,7 @@ void Player::Update(float timestep)
 		{
 			
 			m_position -= right*m_moveSpeed*timestep;
-			didJustMove = true;
+			
 		}
 		else {
 			resetpos(m_position - right);
@@ -103,13 +113,16 @@ void Player::Update(float timestep)
 		{
 			
 			m_position += right*m_moveSpeed*timestep;
-			didJustMove = true;
+			
 		}
 		else {
 			resetpos(m_position + right);
 		}
 	}
-
+	if (m_input->GetMouseDown(LEFT_MOUSE)) {
+		Vector3 bulletPosition = m_position + Vector3(0, 0.5f, 0) + target;
+		m_gun->Shoot(bulletPosition, target);
+	}
 	//if (didJustMove)
 	//{
 	//	// We want to react once per move (not every frame)
@@ -124,7 +137,7 @@ bool Player::CanMoveHere(Vector3 target)
 	// We can't step onto a wall or a disabled tile
 	float x = target.x;
 	float z = target.z;
-	if (x < 0.75 || x>14.25 || z > 14.25 || z < 0.75) {
+	if (x < 0.75 || x>=14 || z >=14 || z < 0.75) {
 		return false;
 	}
 	return true;
@@ -132,9 +145,9 @@ bool Player::CanMoveHere(Vector3 target)
 
 void Player::resetpos(Vector3 target_pos)
 {
-	if (target_pos.x > 14.25) m_position.x = 14.25;
+	if (target_pos.x > 14) m_position.x = 14;
 	if (target_pos.x < 0.75)m_position.x = 0.75;
-	if (target_pos.z > 14.25)m_position.z = 14.25;
+	if (target_pos.z > 14)m_position.z = 14;
 	if (target_pos.z < 0.75)m_position.z = 0.75;
 }
 
@@ -162,6 +175,17 @@ void Player::BeHit(int amount)
 {
 	// "abs" keeps a value positive
 	m_health -= abs(amount);
+}
+int Player::GetPlayerClip()
+{
+	int clipNumber = m_gun->GetCurrentClip();
+	return clipNumber;
+}
+
+int Player::GetPlayerMagazine()
+{
+	int magazineNumber = m_gun->GetMagazineCapacity();
+	return magazineNumber;
 }
 
 

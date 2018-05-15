@@ -69,17 +69,18 @@
     <ClCompile Include="bulletManger.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="FlyingCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="gun.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshManager.cpp" />
-    <ClCompile Include="monster.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Testing.cpp" />
@@ -92,9 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.h" />
-    <ClInclude Include="bulletManger.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Collisions.h" />
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="DirectXTK\CommonStates.h" />
     <ClInclude Include="DirectXTK\SimpleMath.h" />
@@ -105,8 +108,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="gun.h" />
-    <ClInclude Include="monster.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Testing.h" />
     <ClInclude Include="InputController.h" />

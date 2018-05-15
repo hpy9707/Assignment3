@@ -11,7 +11,8 @@
 #include "GameObject.h"
 #include "InputController.h"
 #include "GameBoard.h"
-#include"monster.h"
+#include"Gun.h"
+
 
 class Player : public GameObject
 {
@@ -36,22 +37,13 @@ private:
 	//bool m_isTrapped;
 	
 	float m_heading;
-	
+	float m_pitch;
 	float m_rotationSpeed;
 	//Monster* m_monster;
 	// Ask the GameBoard if we are allowed to move to a particular tile
 	bool CanMoveHere(Vector3 target);
 	void resetpos(Vector3 target_pos);
-	// Check if surrounding cells are walkable
-	//void CheckIfTrapped();
-
-	// Housekeeping after we receive input
-	//void FinishTurn();
-
-	// Check what type of tile is beneth us and react
-	//void ReactToTile();
-
-	// Used to spawn the player in a random position and teleport between blue tiles
+	Gun* m_gun;
 	void TeleportToTileOfType(TileType type);
 
 	// For Monster battles
@@ -61,7 +53,7 @@ private:
 
 public:
 	Player();
-	Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board);
+	Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board, BulletManager* bulletmanager);
 	~Player();
 
 	void Update(float timestep);
@@ -74,7 +66,8 @@ public:
 	// Game will use these to output info to the player
 	int GetNumberOfMonstersDefeated() { return m_monstersDefeated; }
 	int GetScore() { return m_score; }
-	
+	int GetPlayerClip();
+	int GetPlayerMagazine();
 };
 
 #endif
