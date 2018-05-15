@@ -23,8 +23,8 @@
 
 #include "DirectXTK/SpriteBatch.h"
 #include "DirectXTK/SpriteFont.h"
-#include "Testing.h"
-
+#include "Monster.h"
+#include"Healing.h"
 #include <vector>
 
 class Game
@@ -52,7 +52,7 @@ private:
 	GameBoard* m_gameboard;
 	Player* m_player;
 	std::vector<Monster*> m_monsterMesh;
-	std::vector<GameObject*>m_capsuleMesh;
+	std::vector<Healing*>m_capsuleMesh;
 	BulletManager* m_bulletmanager;
 
 	// Wide strings use more than 8 bits per character so they can capture more symbols

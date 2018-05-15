@@ -1,3 +1,4 @@
-﻿  player.cpp
+﻿  Monster.cpp
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.exe
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.pdb (Full PDB)

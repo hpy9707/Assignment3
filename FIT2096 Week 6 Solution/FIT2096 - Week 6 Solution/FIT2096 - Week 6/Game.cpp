@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "TexturedShader.h"
 #include"tile.h"
-#include "StaticObject.h"
+
 #include"MathsHelper.h"
 #include "FlyingCamera.h"
 #include "ThirdPersonCamera.h"
@@ -195,7 +195,7 @@ void Game::InitGameWorld()
 		{
 			
 			if (m_gameboard->GetTileTypeForPosition(x, z) == TileType::HEALTH ){
-				m_capsuleMesh.push_back(new StaticObject(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
+				m_capsuleMesh.push_back(new Healing(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
 					m_diffuseTexturedShader,
 					m_textureManager->GetTexture("Assets/Textures/tile_green.png"),
 					Vector3(x, 0.25, z-0.25)));
@@ -217,7 +217,9 @@ void Game::InitGameWorld()
 		m_monsterMesh.push_back(new Monster(m_meshManager->GetMesh("Assets/Meshes/enemy.obj"),
 			m_diffuseTexturedShader,
 			m_textureManager->GetTexture("Assets/Textures/tile_red3.png"),
-			Vector3(x, 0, z)));
+			Vector3(x, 0, z)
+			,i)
+			);
 	}
 	for (int i = 0; i <m_monsterMesh.size(); i++) {
 		m_monsterMesh[i]->SetUniformScale(0.5f);
@@ -235,6 +237,7 @@ void Game::Update(float timestep)
 	m_bulletmanager->Update(timestep);
 	for (unsigned int i = 0; i < m_monsterMesh.size(); i++) {
 		m_monsterMesh[i]->LookAt(m_player->GetPosition());
+		m_monsterMesh[i]->Moving(timestep,m_player->GetPosition());
 	}
 
 
@@ -245,11 +248,12 @@ void Game::Update(float timestep)
 		actualpos.y = 0;
 		actualpos.z= m_capsuleMesh[i]->GetPosition().z+0.25;
 		if (actualpos == m_player->GetPosition()) {
-			GameObject* temp;
+			Healing* temp;
 			temp = m_capsuleMesh[i];
 			m_capsuleMesh[i] = m_capsuleMesh[m_capsuleMesh.size() - 1];
 			 m_capsuleMesh[m_capsuleMesh.size() - 1] = temp;
 			m_capsuleMesh.pop_back();
+			delete temp;
 		}
 	}
 	m_gameboard->Update(timestep);

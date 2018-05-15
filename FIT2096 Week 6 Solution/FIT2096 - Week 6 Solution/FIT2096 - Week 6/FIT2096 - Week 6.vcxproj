@@ -81,9 +81,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshManager.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Testing.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturedShader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -109,14 +109,14 @@
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gun.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="Testing.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="MathsHelper.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="Healing.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturedShader.h" />
     <ClInclude Include="TextureManager.h" />
