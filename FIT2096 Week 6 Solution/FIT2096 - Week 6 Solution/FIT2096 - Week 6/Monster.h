@@ -13,11 +13,15 @@ private:
 	float m_movespeed;
 	int m_type;
 	bool m_moving;
+	Vector3 random_position;
+	Vector3 original_position;
+	bool facelocation;
 	void runway1(Vector3 target ,float timestep);
 	void runway2(Vector3 target, float timestep);
-	void runway3(Vector3 target, float timestep);
-	void runway4(Vector3 target, float timestep);
+	void runway3(float timestep);
+	void runway4(float timestep);
 	void runway5(Vector3 target, float timestep);
+
 public:
 
 	Monster();
