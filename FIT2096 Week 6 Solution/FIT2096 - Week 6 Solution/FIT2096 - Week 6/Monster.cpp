@@ -8,17 +8,60 @@ Monster::Monster()
 	original_position = m_position;
 	facelocation = true;
 	random_position = Vector3(MathsHelper::RandomRange(1.0f, 14.0f), 0, MathsHelper::RandomRange(1.0f, 14.0f));
+
 }
 
 Monster::Monster(Mesh * mesh, Shader * shader, Texture * texture, Vector3 position, int type) :GameObject(mesh, shader, texture, position)
 {
 	m_type = type;
-	m_health = 20;
-	m_movespeed = 1.0f;
 	m_moving = true;
 	original_position=m_position;
 	facelocation = true;
+	m_isAlive = true;
+	m_boundingBox = CBoundingBox(m_position + m_mesh->GetMin(), m_position + m_mesh->GetMax());
+	initialproperty(type);
 	random_position = Vector3(MathsHelper::RandomRange(1.0f, 14.0f), 0, MathsHelper::RandomRange(1.0f, 14.0f));
+}
+
+void Monster::initialproperty(int type)
+{
+	switch (type)
+	{case 1:
+		m_health = 10;
+		m_movespeed = 2.0f;
+		break;
+	case 2:
+		m_health = 20;
+		m_movespeed = 1.5f;
+		break;
+	case 3:
+		m_health = 30;
+		m_movespeed = 1.0f;
+		break;
+	case 4:
+		m_health = 40;
+		m_movespeed = 0.5f;
+		break;
+	case 5:
+		m_health = 50;
+		m_movespeed = 0.0f;
+		break;
+
+	}
+}
+
+void Monster::OnBulletCollisionEnter()
+{
+	m_health -= 7;
+	if (m_health < 0) {
+		m_isAlive = false;
+	}
+}
+
+void Monster::OnBulletCollisionHeadEnter()
+{
+	m_health = 0;
+	m_isAlive = false;
 }
 
 
@@ -155,6 +198,7 @@ void Monster::runway5(Vector3 target, float timestep)
 		random_position = Vector3(MathsHelper::RandomRange(1.0f, 15.0f), 0, MathsHelper::RandomRange(1.0f, 15.0f));
 	}
 }
+
 
 
 Monster::~Monster()

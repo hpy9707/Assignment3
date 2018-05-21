@@ -11,10 +11,12 @@ class Healing : public GameObject
 {
 public:
 	Healing() : GameObject() {}
-	Healing(Mesh* mesh, Shader* shader) : GameObject(mesh, shader) {}
-	Healing(Mesh* mesh, Shader* shader, Texture* texture) : GameObject(mesh, shader, texture) {}
-	Healing(Mesh* mesh, Shader* shader, Vector3 position) : GameObject(mesh, shader, position) {}
-	Healing(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position) : GameObject(mesh, shader, texture, position) {}
+	bool used;
+	Healing(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position);
+	void OnPlayerCollisionEnter();
+	CBoundingBox m_boundingBox;
+	CBoundingBox GetBounds() { return m_boundingBox; }
+	bool Getused() { return used; }
 
 	void Update(float timestep)
 	{

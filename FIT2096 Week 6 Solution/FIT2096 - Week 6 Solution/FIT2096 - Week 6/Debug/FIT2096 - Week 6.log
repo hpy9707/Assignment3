@@ -1,10 +1,20 @@
-﻿DirectXTK_VS2015.lib(CommonStates.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(CommonStates.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(BinaryReader.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(BinaryReader.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(pch.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(pch.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(SimpleMath.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(SimpleMath.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(SpriteBatch.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(SpriteBatch.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(SpriteFont.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(SpriteFont.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(VertexTypes.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(VertexTypes.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
-DirectXTK_VS2015.lib(WICTextureLoader.obj) : warning LNK4099: PDB 'DirectXTK.pdb' was not found with 'DirectXTK_VS2015.lib(WICTextureLoader.obj)' or at 'E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\DirectXTK.pdb'; linking object as if no debug info
+﻿  player.cpp
+  bulletManger.cpp
+  bullet.cpp
+  Window.cpp
+  Main.cpp
+  Gun.cpp
+  CollisionManager.cpp
+  Generating Code...
+  Compiling...
+  Game.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(201): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(201): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(205): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(206): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(220): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(224): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(312): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.exe
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.pdb (Full PDB)

@@ -77,6 +77,7 @@
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="Healing.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />

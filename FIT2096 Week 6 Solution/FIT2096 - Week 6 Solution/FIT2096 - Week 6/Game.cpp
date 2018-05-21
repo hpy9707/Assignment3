@@ -28,7 +28,7 @@ Game::Game()
 	m_arialFont18 = NULL;
 	m_button = NULL;
 	m_gameboard = NULL;
-	m_player = NULL;
+	m_collisionManager = NULL;
 	m_bulletmanager = NULL;
 }
 
@@ -54,8 +54,8 @@ bool Game::Initialise(Direct3D* renderer, InputController* input)
 	InitUI();
 	InitGameWorld();
 	RefreshUI();
-
-	m_currentCam = new FlyingCamera(m_input, m_player->GetPosition()+Vector3(0,0.5,0));
+	m_collisionManager = new CollisionManager(&m_player, &m_monsterMesh, &m_capsuleMesh,&(m_bulletmanager->Getbullet()));
+	m_currentCam = new FlyingCamera(m_input, m_player[0]->GetPosition()+Vector3(0,0.75,0));
 	//m_currentCam = new ThirdPersonCamera(m_player, Vector3(0, 10, -25), true, 2.0f);
 
 	return true;
@@ -157,17 +157,17 @@ void Game::RefreshUI()
 {
 	// Ensure text in UI matches latest scores etc (call this after data changes)
 	// Concatenate data into our label string using a wide string stream
-	if (m_player)
+	if (m_player[0])
 	{
 		std::wstringstream ss;
 
 		// Round to two decimal places for neater output
-		ss << "Your score: " <<m_player->GetScore();
+		ss << "Your score: " <<m_player[0]->GetScore();
 
 		m_distanceTravelledText = ss.str();
 	}
 	std::wstringstream cc;
-	cc << m_player->GetPlayerClip() << " / " << m_player->GetPlayerMagazine();
+	cc << m_player[0]->GetPlayerClip() << " / " << m_player[0]->GetPlayerMagazine();
 	m_state = cc.str();
 	//if(!m_player->getmonsterAlive())
 	//{
@@ -185,11 +185,11 @@ void Game::InitGameWorld()
 {
 	m_bulletmanager = new BulletManager(m_meshManager, m_textureManager, m_diffuseTexturedShader);
 			m_gameboard = new GameBoard(m_meshManager, m_textureManager, m_diffuseTexturedShader);
-	m_player = new Player(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
-		m_diffuseTexturedShader,
-		m_textureManager->GetTexture("Assets/Textures/tile_white.png"),
-		m_input,
-		m_gameboard,m_bulletmanager);
+			m_player.push_back(new Player(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
+				m_diffuseTexturedShader,
+				m_textureManager->GetTexture("Assets/Textures/tile_white.png"),
+				m_input,
+				m_gameboard, m_bulletmanager));
 	for (int x = 0; x < 16; x++) {
 		for (int z = 0; z < 16; z++)
 		{
@@ -235,31 +235,31 @@ void Game::Update(float timestep)
 		PostQuitMessage(0);
 	}
 	m_bulletmanager->Update(timestep);
-	for (unsigned int i = 0; i < m_monsterMesh.size(); i++) {
-		m_monsterMesh[i]->LookAt(m_player->GetPosition());
-		m_monsterMesh[i]->Moving(timestep,m_player->GetPosition());
-	}
-
-
-	for (unsigned int i = 0; i < m_capsuleMesh.size(); i++) {
-		m_capsuleMesh[i]->Update(timestep);
-		Vector3 actualpos;
-		actualpos.x = m_capsuleMesh[i]->GetPosition().x;
-		actualpos.y = 0;
-		actualpos.z= m_capsuleMesh[i]->GetPosition().z+0.25;
-		if (actualpos == m_player->GetPosition()) {
-			Healing* temp;
-			temp = m_capsuleMesh[i];
-			m_capsuleMesh[i] = m_capsuleMesh[m_capsuleMesh.size() - 1];
-			 m_capsuleMesh[m_capsuleMesh.size() - 1] = temp;
-			m_capsuleMesh.pop_back();
-			delete temp;
+	for (unsigned int i =0; i<m_monsterMesh.size(); i++) {
+		m_monsterMesh[i]->LookAt(m_player[0]->GetPosition());
+		m_monsterMesh[i]->Moving(timestep,m_player[0]->GetPosition());
+		if (!m_monsterMesh[i]->IsAlive()) {
+			m_player[0]->addScore(m_monsterMesh[i]->Gettype());
+			m_monsterMesh[i]->SetMesh(NULL);
 		}
+		
 	}
+
+
+	for (unsigned int i = 0; i <m_capsuleMesh.size() ; i++) {
+		if (!m_capsuleMesh[i]->Getused())
+		{
+			delete m_capsuleMesh[i];
+			m_capsuleMesh.erase(m_capsuleMesh.begin() + i);
+		}
+		
+	}
+	
+	m_collisionManager->CheckCollisions();
 	m_gameboard->Update(timestep);
-	m_player->Update(timestep);
-	checkgameover();
-	m_currentCam->SetPosition(m_player->GetPosition() + Vector3(0, 0.5, 0));
+	m_player[0]->Update(timestep);
+	//checkgameover();
+	m_currentCam->SetPosition(m_player[0]->GetPosition() + Vector3(0, 0.75, 0));
 	//m_button->Update();
 	RefreshUI();
 	m_currentCam->Update(timestep);
@@ -281,7 +281,7 @@ void Game::Render()
 		m_capsuleMesh[i]->Render(m_renderer, m_currentCam);
 	}
 	m_gameboard->Render(m_renderer, m_currentCam);
-	m_player->Render(m_renderer, m_currentCam);
+	m_player[0]->Render(m_renderer, m_currentCam);
 	m_bulletmanager->Render(m_renderer, m_currentCam);
 	DrawUI();
 
@@ -306,7 +306,7 @@ void Game::DrawUI()
 	m_arialFont18->DrawString(m_spriteBatch, m_monsterkilled.c_str(), Vector2(20, 60), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0, 0));
 	m_arialFont18->DrawString(m_spriteBatch, m_state.c_str(), Vector2(600, 680), Color(0.0f, 0.0f, 0.0f), 0, Vector2(0, 0));
 	// Here's how we draw a sprite over our game
-	float currHp = m_player->GetHealth();
+	float currHp = m_player[0]->GetHealth();
 	float num_of_bar = ceil(currHp / 10);
 	for (int i = 0; i < (int)num_of_bar; i++) {
 		m_spriteBatch->Draw(m_currentItemSprite[i]->GetShaderResourceView(), Vector2(20+i*10, 20), Color(1.0f, 0.0f, 0.0f));
@@ -317,7 +317,7 @@ void Game::checkgameover()
 {
 	const char* msg = "";
 
-	if (m_player->GetHealth() <= 0.0f)
+	if (m_player[0]->GetHealth() <= 0.0f)
 	{
 		msg = "You've run out of health.";
 	}
@@ -330,7 +330,7 @@ void Game::checkgameover()
 	if (msg != "")
 	{
 		std::stringstream ss;
-		ss << msg << " You scored " << m_player->GetScore() << " and defeated " << m_player->GetNumberOfMonstersDefeated() << " monsters.";
+		ss << msg << " You scored " << m_player[0]->GetScore() << " and defeated " << m_player[0]->GetNumberOfMonstersDefeated() << " monsters.";
 
 		// Message Boxes are a blocking call which makes life a little easier here
 		MessageBox(NULL, ss.str().c_str(), "Game Over", MB_OK);
@@ -354,6 +354,12 @@ void Game::Shutdown()
 	}
 
 	m_capsuleMesh.empty();
+	for (unsigned int i = 0; i <m_player.size(); i++)
+	{
+		delete m_player[i];
+	}
+
+	m_player.empty();
 
 	if (m_currentCam)
 	{
@@ -416,13 +422,15 @@ void Game::Shutdown()
 		delete m_gameboard;
 		m_gameboard = NULL;
 	}
-	if (m_player) {
-		delete m_player;
-		m_player = NULL;
-	}
+	
 	if (m_bulletmanager)
 	{
 		delete m_bulletmanager;
 		m_bulletmanager = NULL;
 	}
+	if (m_collisionManager) {
+		delete m_collisionManager;
+		m_collisionManager = NULL;
+	}
+
 }

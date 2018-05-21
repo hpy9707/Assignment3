@@ -30,7 +30,7 @@ public:
 	void Update(float timestep);
 	void Render(Direct3D* renderer, Camera* cam);
 	float SetBulletDamage();
-
+	std::vector<Bullet*> Getbullet() { return m_allBullets; }
 
 
 

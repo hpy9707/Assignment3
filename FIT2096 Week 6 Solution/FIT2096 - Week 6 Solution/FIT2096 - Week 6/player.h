@@ -27,7 +27,7 @@ private:
 	// Which board is the player currently on
 	GameBoard* m_currentBoard;
 
-	
+	CBoundingBox m_boundingBox;
 
 
 	// Game variables
@@ -45,30 +45,28 @@ private:
 	void resetpos(Vector3 target_pos);
 	Gun* m_gun;
 	void TeleportToTileOfType(TileType type);
-
-	// For Monster battles
-	//int Attack();
+	
 	void BeHit(int amount);
-	//void DoMonsterBattle();
+	
 
 public:
 	Player();
 	Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board, BulletManager* bulletmanager);
 	~Player();
-
+	void addScore(int num) { m_score += num; m_monstersDefeated++; }
 	void Update(float timestep);
-
-	// The Game class will use these to determine if the game should end
-//	bool GetIsTrapped() { return m_isTrapped; }
+	void OnHealingCollisionEnter();
+	
 	float GetHealth() { return m_health; }
-	//bool getmonsterAlive() { return m_monster->IsAlive(); }
 
-	// Game will use these to output info to the player
+
+	
 	int GetNumberOfMonstersDefeated() { return m_monstersDefeated; }
 	int GetScore() { return m_score; }
 	int GetPlayerClip();
 	int GetPlayerMagazine();
 	bool getreload() { return m_gun->getreload(); }
+	CBoundingBox GetBounds() { return m_boundingBox; }
 };
 
 #endif

@@ -25,6 +25,7 @@
 #include "DirectXTK/SpriteFont.h"
 #include "Monster.h"
 #include"Healing.h"
+#include"CollisionManager.h"
 #include <vector>
 
 class Game
@@ -35,7 +36,7 @@ private:
 	InputController* m_input;
 	MeshManager* m_meshManager;
 	TextureManager* m_textureManager;
-
+	CollisionManager* m_collisionManager;
 	// Sprites / Fonts
 	SpriteBatch* m_spriteBatch;
 	SpriteFont* m_arialFont12;
@@ -50,10 +51,11 @@ private:
 	
 	//game objects
 	GameBoard* m_gameboard;
-	Player* m_player;
+	std::vector<Player*> m_player;
 	std::vector<Monster*> m_monsterMesh;
 	std::vector<Healing*>m_capsuleMesh;
 	BulletManager* m_bulletmanager;
+	
 
 	// Wide strings use more than 8 bits per character so they can capture more symbols
 	// Windows loves them and as such so does Direct3D and its text helpers

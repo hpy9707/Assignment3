@@ -12,7 +12,7 @@ Player::Player()
 	m_score = 0;
 	m_monstersDefeated = 0;
 	m_gun = NULL;
-	//m_monster = NULL;
+	m_boundingBox = CBoundingBox(m_position + m_mesh->GetMin(), m_position + m_mesh->GetMax());
 }
 
 Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* input, GameBoard* board ,BulletManager* bulletmanager) : GameObject(mesh, shader, texture, Vector3::Zero)
@@ -27,7 +27,7 @@ Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* in
 	m_score = 0;
 	m_monstersDefeated = 0;
 	TeleportToTileOfType(TileType::NORMAL);
-	m_gun = new Gun(bulletmanager, 30, 5.0f, 0.2f);
+	m_gun = new Gun(bulletmanager, 30, 2.0f, 0.2f);
 }
 
 Player::~Player() {
@@ -137,6 +137,13 @@ void Player::Update(float timestep)
 	//	// We want to react once per move (not every frame)
 	//	FinishTurn();
 	//}
+}
+
+void Player::OnHealingCollisionEnter()
+{
+	m_health += 15;
+	if (m_health > 100)
+		m_health = 100;
 }
 
 
