@@ -45,7 +45,9 @@ void Gun::Reloading()
 		else {
 			m_currentClips = m_clipsCapacity;
 			m_magazineCapacity -= bulletNumber;
+			
 		}
+		m_startReloading = false;
 	}
 }
 

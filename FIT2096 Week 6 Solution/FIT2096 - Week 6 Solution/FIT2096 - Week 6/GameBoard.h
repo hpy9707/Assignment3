@@ -18,7 +18,7 @@ private:
 
 	// Storing tiles in a 2D array to make neighbour checking easier
 	Tile* m_tiles[BOARD_HEIGHT][BOARD_WIDTH];
-
+	std::vector<Tile*> m_shortlist;
 	void Generate();
 	void AddWalls();
 
@@ -33,7 +33,8 @@ public:
 	
 	TileType GetTileTypeForPosition(int x, int z);
 	Tile* GetRandomTileOfType(TileType type);
-	std::vector<Tile*>* GetAllTileBytype(TileType type);
+	std::vector<Tile*>* getalltile() { return &m_shortlist; }//??????
+	//teleport???
 
 };
 

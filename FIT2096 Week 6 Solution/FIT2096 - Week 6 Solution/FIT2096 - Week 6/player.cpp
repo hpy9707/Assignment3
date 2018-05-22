@@ -150,6 +150,12 @@ void Player::OnHealingCollisionEnter()
 		m_health = 100;
 }
 
+void Player::OnBulletCollisionEnter()
+{
+	m_health -= 12;
+	
+}
+
 
 bool Player::CanMoveHere(Vector3 target)
 {
@@ -190,11 +196,6 @@ void Player::TeleportToTileOfType(TileType type)
 }
 
 
-void Player::BeHit(int amount)
-{
-	// "abs" keeps a value positive
-	m_health -= abs(amount);
-}
 int Player::GetPlayerClip()
 {
 	int clipNumber = m_gun->GetCurrentClip();

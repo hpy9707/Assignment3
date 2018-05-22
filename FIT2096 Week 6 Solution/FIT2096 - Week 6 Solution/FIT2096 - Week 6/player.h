@@ -46,7 +46,7 @@ private:
 	Gun* m_gun;
 	void TeleportToTileOfType(TileType type);
 	
-	void BeHit(int amount);
+	
 	
 
 public:
@@ -56,7 +56,7 @@ public:
 	void addScore(int num) { m_score += num; m_monstersDefeated++; }
 	void Update(float timestep);
 	void OnHealingCollisionEnter();
-	
+	void OnBulletCollisionEnter();
 	float GetHealth() { return m_health; }
 
 

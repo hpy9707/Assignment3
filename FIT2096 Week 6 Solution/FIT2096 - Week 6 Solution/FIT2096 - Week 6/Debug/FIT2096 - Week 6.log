@@ -1,3 +1,74 @@
-﻿  Monster.cpp
-  FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.exe
-  FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.pdb (Full PDB)
+﻿  player.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\string(17): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2238: unexpected token(s) preceding ';'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\string(17): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+  Window.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\memory(1175): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2238: unexpected token(s) preceding ';'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\memory(1175): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+  Monster.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\monster.cpp(11): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\monster.cpp(64): warning C4305: 'argument': truncation from 'double' to 'float'
+  Main.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\memory(1175): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2238: unexpected token(s) preceding ';'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\memory(1175): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+  GameBoard.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\string(17): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2238: unexpected token(s) preceding ';'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\string(17): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(87): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.cpp(112): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\memory(1175): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(21): error C2238: unexpected token(s) preceding ';'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2039: 'vector': is not a member of 'std'
+  d:\vs2015\vc\include\memory(1175): note: see declaration of 'std'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2143: syntax error: missing ';' before '<'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\gameboard.h(36): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(210): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(210): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(214): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(215): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(230): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(234): warning C4018: '<': signed/unsigned mismatch
+e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\game.cpp(330): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  CollisionManager.cpp
+  Generating Code...

@@ -17,7 +17,7 @@ private:
 	std::vector<Monster*>* m_monsters;
 	std::vector<Healing*>* m_healings;
 	std::vector<Bullet*>* m_bullets;
-	std::vector<Tile*>* m_teleports;
+	//std::vector<Tile*>* m_teleports;
 
 	GameObject* m_currentCollisions[MAX_ALLOWED_COLLISIONS];
 	GameObject* m_previousCollisions[MAX_ALLOWED_COLLISIONS];
@@ -35,7 +35,8 @@ public:
 	CollisionManager(std::vector<Player*>* players,
 		std::vector<Monster*>* enemy, 
 		std::vector<Healing*>* healthpack,
-		std::vector<Bullet*>* bullet, std::vector<Tile*>* tile);
+		std::vector<Bullet*>* bullet);
+	//, std::vector<Tile*>* tile);
 	void CheckCollisions();
 };
 

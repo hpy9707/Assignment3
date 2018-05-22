@@ -54,7 +54,9 @@ bool Game::Initialise(Direct3D* renderer, InputController* input)
 	InitUI();
 	InitGameWorld();
 	RefreshUI();
-	m_collisionManager = new CollisionManager(&m_player, &m_monsterMesh, &m_capsuleMesh,m_bulletmanager->Getbullet());
+	m_collisionManager = new CollisionManager(&m_player, &m_monsterMesh, &m_capsuleMesh,
+		m_bulletmanager->Getbullet());
+		//,m_gameboard->GetAllTileBytype(TileType::TELEPORT));
 	m_currentCam = new FlyingCamera(m_input, m_player[0]->GetPosition()+Vector3(0,0.75,0));
 	//m_currentCam = new ThirdPersonCamera(m_player, Vector3(0, 10, -25), true, 2.0f);
 
@@ -167,15 +169,24 @@ void Game::RefreshUI()
 	std::wstringstream cc;
 	cc << m_player[0]->GetPlayerClip() << " / " << m_player[0]->GetPlayerMagazine();
 	m_state = cc.str();
-	//if(!m_player->getmonsterAlive())
-	//{
-	//	std::wstringstream ss;
+	if(m_player[0]->getreload())
+	{
+		std::wstringstream ss;
 
-	//	// Round to two decimal places for neater output
-	//	ss << "You kill the monster! " ;
+		// Round to two decimal places for neater output
+		ss << "Reloading " ;
 
-	//	m_monsterkilled = ss.str();
-	//}
+		m_monsterkilled = ss.str();
+	}
+	else {
+
+		std::wstringstream ss;
+
+		// Round to two decimal places for neater output
+		ss << "";
+
+		m_monsterkilled = ss.str();
+	}
 	
 }
 
@@ -238,8 +249,9 @@ void Game::Update(float timestep)
 	for (unsigned int i =0; i<m_monsterMesh.size(); i++) {
 		
 		if (!m_monsterMesh[i]->IsAlive()) {
+			delete m_monsterMesh[i];
+			m_monsterMesh.erase(m_monsterMesh.begin()+i);
 			
-			m_monsterMesh[i]->SetMesh(NULL);
 			}
 		else {
 			m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
@@ -308,8 +320,8 @@ void Game::DrawUI()
 	//m_button->Render();
 
 	// Let's draw some text over our game
-	m_arialFont18->DrawString(m_spriteBatch, m_distanceTravelledText.c_str(), Vector2(20,40), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0,0));
-	m_arialFont18->DrawString(m_spriteBatch, m_monsterkilled.c_str(), Vector2(20, 60), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0, 0));
+	m_arialFont18->DrawString(m_spriteBatch, m_distanceTravelledText.c_str(), Vector2(20,70), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0,0));
+	m_arialFont18->DrawString(m_spriteBatch, m_monsterkilled.c_str(), Vector2(20, 100), Color(1.0f, 1.0f, 1.0f), 0, Vector2(0, 0));
 	m_arialFont18->DrawString(m_spriteBatch, m_state.c_str(), Vector2(600, 680), Color(0.0f, 0.0f, 0.0f), 0, Vector2(0, 0));
 	// Here's how we draw a sprite over our game
 	float currHp = m_player[0]->GetHealth();
@@ -328,11 +340,10 @@ void Game::checkgameover()
 		msg = "You've run out of health.";
 	}
 	
-	/*else if (m_player->GetIsTrapped())
-	{
-		msg = "You're trapped.";
+	if (m_monsterMesh.size()==0) {
+		msg = "You kill all monster!\n";
 	}
-*/
+	
 	if (msg != "")
 	{
 		std::stringstream ss;
