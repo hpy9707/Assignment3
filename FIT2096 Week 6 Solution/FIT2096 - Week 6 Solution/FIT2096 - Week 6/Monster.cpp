@@ -23,6 +23,8 @@ Monster::Monster(Mesh * mesh, Shader * shader, Texture * texture, Vector3 positi
 	initialproperty(type);//it will create different enemy property depending on enemy's type 
 						  //Different type will affect health  movespeed and gun.
 	random_position = Vector3(MathsHelper::RandomRange(1.0f, 14.0f), 0, MathsHelper::RandomRange(1.0f, 14.0f));
+	//since i change the scale of mesh 
+	//I also need some change in bounding
 }
 
 void Monster::initialproperty(int type)

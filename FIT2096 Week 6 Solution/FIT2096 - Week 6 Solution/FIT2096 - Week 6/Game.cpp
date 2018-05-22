@@ -212,14 +212,14 @@ void Game::InitGameWorld()
 			}
 		}
 	} 
-	for (int i = 0; i <m_capsuleMesh.size(); i++) {
+	for (int i = 0; i <m_capsuleMesh.size(); i++) {//adjust capsule to a suitable way
 		m_capsuleMesh[i]->SetXRotation(ToRadians(90.0f));
 		m_capsuleMesh[i]->SetUniformScale(0.5f);
 	}
 			
 	int x;
 	int z;
-	for (int i = 1; i <= 5; i++) {
+	for (int i = 1; i <= 5; i++) {//this can guarantee the monster only in normal tile at the start and there are only 5.
 		do {
 			 x = 2 + rand() % 12;
 			 z = 2 + rand() % 12;
@@ -233,7 +233,7 @@ void Game::InitGameWorld()
 			);
 	}
 	for (int i = 0; i <m_monsterMesh.size(); i++) {
-		m_monsterMesh[i]->SetUniformScale(0.5f);
+		m_monsterMesh[i]->SetUniformScale(0.5f);//change scale 
 		m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
 	}
 	

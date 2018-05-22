@@ -15,10 +15,10 @@ Bullet::Bullet(Mesh * mesh, Shader * shader, Texture * texture, float damage, Ve
 }
 
 void Bullet::Update(float timestep)
-{
+{//I set a life time of bullet when it run some time ( longer enough) then set it to dead and it will be remmoved in bullet manager
 	if (m_alive) {
 		m_position += m_forward*m_speed*timestep;
-		m_boundingBox.SetMin(m_position + m_mesh->GetMin());
+		m_boundingBox.SetMin(m_position + m_mesh->GetMin());//update bounding
 		m_boundingBox.SetMax(m_position + m_mesh->GetMax());
 		m_lifetime -= timestep;
 	}
@@ -36,7 +36,7 @@ void Bullet::Render(Direct3D * renderer, Camera * cam)
 	}
 }
 
-void Bullet::OnEnemyCollisionEnter()
+void Bullet::OnEnemyCollisionEnter()//when it hit enemy or player it also change to dead.
 {
 	m_alive = false;
 }

@@ -118,7 +118,7 @@ void Player::Update(float timestep)
 	if (m_input->GetKeyDown('R')) {
 		if (m_gun->GetMagazineCapacity() > 0) {
 			m_gun->setReload(true);
-			m_gun->setFire(false);
+			m_gun->setFire(false);//when reload player cannot shot
 		}
 	}
 	if (m_input->GetMouseDown(LEFT_MOUSE)) {

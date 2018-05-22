@@ -50,7 +50,7 @@ TileType Tile::SelectType()
 
 	if (roll <= 80)
 		return TileType::NORMAL;
-	else if (roll > 95)
+	else if (roll > 95)//if too much teleporting it may let player  confused.
 		return TileType::TELEPORT;
 	else 
 		return TileType::HEALTH;
@@ -86,7 +86,7 @@ void Tile::SetType(TileType type)
 	m_type = type;
 	m_texture = GetTextureForType(m_type);
 	if (m_type == TileType::TELEPORT) {
-		m_CBbox = CBoundingBox(m_position + m_mesh->GetMin(), m_position + m_mesh->GetMax() + Vector3(0, 0.5, 0));
+		m_CBbox = CBoundingBox(m_position + m_mesh->GetMin(), m_position + m_mesh->GetMax() + Vector3(0, 0.5, 0));//only teleport tile need a cbbox
 	}
 }
 

@@ -54,7 +54,3 @@ void BulletManager::Render(Direct3D * renderer, Camera * cam)
 	}
 }
 
-float BulletManager::SetBulletDamage()
-{
-	return MathsHelper::RandomRange(5.0f, 10.0f);
-}

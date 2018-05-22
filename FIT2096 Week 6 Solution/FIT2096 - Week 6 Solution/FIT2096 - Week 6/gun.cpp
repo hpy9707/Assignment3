@@ -21,7 +21,7 @@ Gun::~Gun()
 
 void Gun::Shoot(Vector3 position, Vector3 forward)
 {
-	bool candoShoot = true;
+	bool candoShoot = true;//to guarantee the shot speed , use a fire timer  to control .
 	if (m_currentClips == 0)
 		candoShoot = false;
 	if (m_fireTimer >= 0)
@@ -61,15 +61,12 @@ void Gun::Update(float timestep)
 		m_startReloading = true;
 		m_fire = false;
 	}
-
-
-
-	if (m_startReloading) {
+	if (m_startReloading) {//same idea about reloading
 		if (m_currentReloading <= 0) {
 			Reloading();
 			m_currentReloading = m_reloadTime;
 			m_startReloading = false;
-			m_fire = true;
+			m_fire = true;//after reloading player can continue to shoot.
 		}
 		else {
 			m_currentReloading -= timestep;
