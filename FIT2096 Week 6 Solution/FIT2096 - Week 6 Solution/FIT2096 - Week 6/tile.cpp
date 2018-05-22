@@ -85,5 +85,8 @@ void Tile::SetType(TileType type)
 {
 	m_type = type;
 	m_texture = GetTextureForType(m_type);
+	if (m_type == TileType::TELEPORT) {
+		m_CBbox = CBoundingBox(m_position + m_mesh->GetMin(), m_position + m_mesh->GetMax() + Vector3(0, 0.5, 0));
+	}
 }
 

@@ -8,6 +8,7 @@
 #include"Healing.h"
 #include"Bullet.h"
 
+
 #define MAX_ALLOWED_COLLISIONS 2048
 
 class CollisionManager {
@@ -16,6 +17,7 @@ private:
 	std::vector<Monster*>* m_monsters;
 	std::vector<Healing*>* m_healings;
 	std::vector<Bullet*>* m_bullets;
+	std::vector<Tile*>* m_teleports;
 
 	GameObject* m_currentCollisions[MAX_ALLOWED_COLLISIONS];
 	GameObject* m_previousCollisions[MAX_ALLOWED_COLLISIONS];
@@ -26,11 +28,14 @@ private:
 
 	
 	void PlayerToHealthPack();
-	
 	void BulletToEnemy();
-
+	void BulletToPlayer();
+	void PlayerToTeleport();
 public:
-	CollisionManager(std::vector<Player*>* players, std::vector<Monster*>* enemy, std::vector<Healing*>* healthpack, std::vector<Bullet*>* bullet);
+	CollisionManager(std::vector<Player*>* players,
+		std::vector<Monster*>* enemy, 
+		std::vector<Healing*>* healthpack,
+		std::vector<Bullet*>* bullet, std::vector<Tile*>* tile);
 	void CheckCollisions();
 };
 

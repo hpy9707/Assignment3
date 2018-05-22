@@ -26,13 +26,14 @@ private:
 
 	TileType SelectType();
 	Texture* GetTextureForType(TileType type);
-
+	CBoundingBox m_CBbox;
 public:
 	Tile();
 	Tile(Mesh* mesh, Shader* shader, Vector3 pos, TextureManager* textureManager);
 	Tile(Mesh* mesh, Shader* shader, Vector3 pos, TextureManager* textureManager, TileType type);
 	~Tile();
 
+	CBoundingBox getBound() { return m_CBbox; }
 	void Update(float timestep);
 	TileType GetType() { return m_type; }
 	void SetType(TileType type);

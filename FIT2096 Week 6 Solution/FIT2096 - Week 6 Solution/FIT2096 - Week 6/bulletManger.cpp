@@ -17,7 +17,8 @@ BulletManager::~BulletManager()
 		delete m_allBullets[i];
 	}
 
-	m_allBullets.clear();
+	m_allBullets.clear(); 
+	
 }
 
 void BulletManager::CreateBullets(Vector3 position, Vector3 forward)
@@ -28,7 +29,7 @@ void BulletManager::CreateBullets(Vector3 position, Vector3 forward)
 
 void BulletManager::CheckAndDelete()
 {
-	for (int i = m_allBullets.size() - 1; i > 0; i--) {
+	for (int i = m_allBullets.size()-1 ; i >= 0; i--) {
 		if (!m_allBullets[i]->getBulletalive()) {
 			delete m_allBullets[i];
 			m_allBullets.erase(m_allBullets.begin() + i);

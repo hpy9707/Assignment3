@@ -1,11 +1,14 @@
 #include "CollisionManager.h"
 
-CollisionManager::CollisionManager(std::vector<Player*>* players, std::vector<Monster*>* enemy, std::vector<Healing*>* healthpack, std::vector<Bullet*>* bullet)
+CollisionManager::CollisionManager(std::vector<Player*>* players, 
+	std::vector<Monster*>* enemy, std::vector<Healing*>* healthpack, 
+	std::vector<Bullet*>* bullet, std::vector<Tile*>* tile)
 {
 	m_player = players;
 	m_monsters = enemy;
 	m_healings = healthpack;
 	m_bullets = bullet;
+	m_teleports = tile;
 	// Clear our arrays to 0 (NULL)
 	memset(m_currentCollisions, 0, sizeof(m_currentCollisions));
 	memset(m_previousCollisions, 0, sizeof(m_previousCollisions));
@@ -19,6 +22,7 @@ void CollisionManager::CheckCollisions()
 	
 	PlayerToHealthPack();
 	BulletToEnemy();
+	
 	// Move all current collisions into previous
 	memcpy(m_previousCollisions, m_currentCollisions, sizeof(m_currentCollisions));
 
@@ -66,13 +70,13 @@ void CollisionManager::PlayerToHealthPack() {
 			Healing* healing = (*m_healings)[j];
 			CBoundingBox playerBounds = player->GetBounds();
 			CBoundingBox healingBounds = healing->GetBounds();
-
 			bool isColliding = CheckCollision(playerBounds, healingBounds);
 			bool wasColliding = ArrayContainsCollision(m_previousCollisions, player, healing);
 			if (isColliding) {
 				AddCollision(player, healing);
-
+				
 				if (!wasColliding) {
+					OutputDebugString("Healing!\n");
 					player->OnHealingCollisionEnter();
 					healing->OnPlayerCollisionEnter();
 				}
@@ -85,26 +89,36 @@ void CollisionManager::PlayerToHealthPack() {
 
 void CollisionManager::BulletToEnemy()
 {
-	for (unsigned int i = 0; i < m_bullets->size(); i++) {
-		for (unsigned j = 0; j < m_monsters->size(); j++) {
-			Bullet* bullet = (*m_bullets)[i];
-			Monster* monster = (*m_monsters)[j];
+	for (unsigned int i = 0; i < m_monsters->size(); i++) {
+		for (unsigned j = 0; j < m_bullets->size(); j++) {
+			Bullet* bullet = (*m_bullets)[j];
+			Monster* monster = (*m_monsters)[i];
 			CBoundingBox bulletBounds = bullet->GetBounds();
 			CBoundingBox monsterBounds = monster->GetBounds();
 
 			bool isColliding = CheckCollision(bulletBounds, monsterBounds);
 			bool wasColliding = ArrayContainsCollision(m_previousCollisions,bullet, monster);
 			if (isColliding) {
+				
 				AddCollision(bullet, monster);
 
 				if (!wasColliding) {
-					bullet->OnEnemyCollisionEnter();
+					
+				
 					float y = bullet->GetPosition().y;
-					if (y >= 0.8&&y <= 1.0)
+					if (y >= 0.75&&y<0.9)
+					{
+						
 						monster->OnBulletCollisionHeadEnter();
+						bullet->OnEnemyCollisionEnter();
+					}
 					else
+					{
 						monster->OnBulletCollisionEnter();
-
+						bullet->OnEnemyCollisionEnter();
+					}
+					if (!monster->IsAlive())
+						(*m_player)[0]->addScore(monster->Gettype());
 				}
 				
 			}

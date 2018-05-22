@@ -9,13 +9,14 @@ Gun::Gun(BulletManager * bulletManager, int clipsCapacity, float reloadTime, flo
 	m_currentReloading = m_reloadTime;
 	m_fireFrequency = fireFrequency;
 	m_fireTimer = m_fireFrequency;
-	m_magazineCapacity = 150;
+	m_magazineCapacity = clipsCapacity*5;
 	m_startReloading = false;
 	m_fire = true;
 }
 
 Gun::~Gun()
 {
+	
 }
 
 void Gun::Shoot(Vector3 position, Vector3 forward)

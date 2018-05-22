@@ -27,6 +27,7 @@ Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* in
 	m_score = 0;
 	m_monstersDefeated = 0;
 	TeleportToTileOfType(TileType::NORMAL);
+	
 	m_gun = new Gun(bulletmanager, 30, 2.0f, 0.2f);
 }
 
@@ -39,6 +40,9 @@ Player::~Player() {
 
 void Player::Update(float timestep)
 {
+	m_boundingBox.SetMin(m_position + m_mesh->GetMin());
+	m_boundingBox.SetMax(m_position + m_mesh->GetMax());
+	
 	m_gun->Update(timestep);
 	// Constantly step towards target position
 	// Could add a distance check here, however seeing we only have one player we'll be fine
@@ -178,11 +182,10 @@ void Player::TeleportToTileOfType(TileType type)
 		// We need to set both the current position and the target
 		// The only time the player remains still is when these two positions match
 		
+		
 		m_position = destinationTile->GetPosition();
 
-		// Tiles start up in the sky and fall down. Ensure player starts on the ground.
-		
-		m_position.y = 0.0f;
+	
 	}
 }
 

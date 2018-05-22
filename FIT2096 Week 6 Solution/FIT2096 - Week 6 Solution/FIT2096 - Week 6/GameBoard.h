@@ -33,6 +33,7 @@ public:
 	
 	TileType GetTileTypeForPosition(int x, int z);
 	Tile* GetRandomTileOfType(TileType type);
+	std::vector<Tile*>* GetAllTileBytype(TileType type);
 
 };
 

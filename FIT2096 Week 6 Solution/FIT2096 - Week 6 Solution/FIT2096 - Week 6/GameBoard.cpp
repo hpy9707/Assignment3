@@ -156,3 +156,21 @@ Tile* GameBoard::GetRandomTileOfType(TileType type)
 	// Return a random tile from the shortlist
 	return shortlist[MathsHelper::RandomRange(0, shortlist.size() - 1)];
 }
+
+std::vector<Tile*>* GameBoard::GetAllTileBytype(TileType type)
+{
+	std::vector<Tile*> shortlist;
+
+	// Find all tiles matching the type we want
+	for (unsigned int z = 0; z < BOARD_HEIGHT; z++)
+	{
+		for (unsigned int x = 0; x < BOARD_WIDTH; x++)
+		{
+			if (m_tiles[z][x]->GetType() == type)
+			{
+				shortlist.push_back(m_tiles[z][x]);
+			}
+		}
+	}
+	return &shortlist;
+}

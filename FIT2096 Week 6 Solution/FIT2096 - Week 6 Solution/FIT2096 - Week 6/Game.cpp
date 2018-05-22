@@ -54,7 +54,7 @@ bool Game::Initialise(Direct3D* renderer, InputController* input)
 	InitUI();
 	InitGameWorld();
 	RefreshUI();
-	m_collisionManager = new CollisionManager(&m_player, &m_monsterMesh, &m_capsuleMesh,&(m_bulletmanager->Getbullet()));
+	m_collisionManager = new CollisionManager(&m_player, &m_monsterMesh, &m_capsuleMesh,m_bulletmanager->Getbullet());
 	m_currentCam = new FlyingCamera(m_input, m_player[0]->GetPosition()+Vector3(0,0.75,0));
 	//m_currentCam = new ThirdPersonCamera(m_player, Vector3(0, 10, -25), true, 2.0f);
 
@@ -84,8 +84,6 @@ bool Game::LoadMeshes()
 
 	if (!m_meshManager->Load(m_renderer, "Assets/Meshes/player_capsule.obj"))
 		return false;
-
-
 	if (!m_meshManager->Load(m_renderer, "Assets/Meshes/enemy.obj"))
 		return false;
 	if (!m_meshManager->Load(m_renderer, "Assets/Meshes/bullet.obj"))
@@ -198,31 +196,33 @@ void Game::InitGameWorld()
 				m_capsuleMesh.push_back(new Healing(m_meshManager->GetMesh("Assets/Meshes/player_capsule.obj"),
 					m_diffuseTexturedShader,
 					m_textureManager->GetTexture("Assets/Textures/tile_green.png"),
-					Vector3(x, 0.25, z-0.25)));
+					Vector3(x, 0.25, z - 0.25)));
 			}
 		}
-		
-		for (int i = 0; i <m_capsuleMesh.size(); i++) {
-			m_capsuleMesh[i]->SetXRotation(ToRadians(90.0f));
-			m_capsuleMesh[i]->SetUniformScale(0.5f);
-		}
-	} int x;
+	} 
+	for (int i = 0; i <m_capsuleMesh.size(); i++) {
+		m_capsuleMesh[i]->SetXRotation(ToRadians(90.0f));
+		m_capsuleMesh[i]->SetUniformScale(0.5f);
+	}
+			
+	int x;
 	int z;
 	for (int i = 1; i <= 5; i++) {
 		do {
 			 x = 2 + rand() % 12;
 			 z = 2 + rand() % 12;
 		} while (m_gameboard->GetTileTypeForPosition(x, z) != TileType::NORMAL);
-
+	
 		m_monsterMesh.push_back(new Monster(m_meshManager->GetMesh("Assets/Meshes/enemy.obj"),
 			m_diffuseTexturedShader,
 			m_textureManager->GetTexture("Assets/Textures/tile_red3.png"),
 			Vector3(x, 0, z)
-			,i)
+			, i, m_bulletmanager)
 			);
 	}
 	for (int i = 0; i <m_monsterMesh.size(); i++) {
 		m_monsterMesh[i]->SetUniformScale(0.5f);
+		m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
 	}
 	
 
@@ -234,13 +234,18 @@ void Game::Update(float timestep)
 	if (m_input->GetKeyDown(VK_ESCAPE)) {
 		PostQuitMessage(0);
 	}
-	m_bulletmanager->Update(timestep);
+	
 	for (unsigned int i =0; i<m_monsterMesh.size(); i++) {
-		m_monsterMesh[i]->LookAt(m_player[0]->GetPosition());
-		m_monsterMesh[i]->Moving(timestep,m_player[0]->GetPosition());
+		
 		if (!m_monsterMesh[i]->IsAlive()) {
-			m_player[0]->addScore(m_monsterMesh[i]->Gettype());
+			
 			m_monsterMesh[i]->SetMesh(NULL);
+			}
+		else {
+			m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
+			
+			m_monsterMesh[i]->Update(timestep);
+			//m_monsterMesh[i]->Moving(timestep, m_player[0]->GetPosition());
 		}
 		
 	}
@@ -256,10 +261,11 @@ void Game::Update(float timestep)
 	}
 	
 	m_collisionManager->CheckCollisions();
+	m_bulletmanager->Update(timestep);
 	m_gameboard->Update(timestep);
 	m_player[0]->Update(timestep);
 	//checkgameover();
-	m_currentCam->SetPosition(m_player[0]->GetPosition() + Vector3(0, 0.75, 0));
+	m_currentCam->SetPosition(m_player[0]->GetPosition() + Vector3(0, 0.75,0));
 	//m_button->Update();
 	RefreshUI();
 	m_currentCam->Update(timestep);
@@ -346,14 +352,18 @@ void Game::Shutdown()
 	{
 		delete m_monsterMesh[i];
 	}
+	if (m_bulletmanager)
+	{
+		delete m_bulletmanager;
+		m_bulletmanager = NULL;
+	}
+	if (m_collisionManager) {
+		delete m_collisionManager;
+		m_collisionManager = NULL;
+	}
+	
 
 	m_monsterMesh.empty();
-	for (unsigned int i = 0; i <m_capsuleMesh.size(); i++)
-	{
-		delete m_capsuleMesh[i];
-	}
-
-	m_capsuleMesh.empty();
 	for (unsigned int i = 0; i <m_player.size(); i++)
 	{
 		delete m_player[i];
@@ -423,14 +433,12 @@ void Game::Shutdown()
 		m_gameboard = NULL;
 	}
 	
-	if (m_bulletmanager)
+	for (unsigned int i = 0; i <m_capsuleMesh.size(); i++)
 	{
-		delete m_bulletmanager;
-		m_bulletmanager = NULL;
+		delete m_capsuleMesh[i];
 	}
-	if (m_collisionManager) {
-		delete m_collisionManager;
-		m_collisionManager = NULL;
-	}
+
+	m_capsuleMesh.empty();
+	
 
 }
