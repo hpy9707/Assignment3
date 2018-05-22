@@ -20,7 +20,8 @@ Monster::Monster(Mesh * mesh, Shader * shader, Texture * texture, Vector3 positi
 	facelocation = true;
 	m_isAlive = true;
 	m_bulletmanager = bulletmanager;
-	initialproperty(type);
+	initialproperty(type);//it will create different enemy property depending on enemy's type 
+						  //Different type will affect health  movespeed and gun.
 	random_position = Vector3(MathsHelper::RandomRange(1.0f, 14.0f), 0, MathsHelper::RandomRange(1.0f, 14.0f));
 }
 
@@ -28,27 +29,27 @@ void Monster::initialproperty(int type)
 {
 	switch (type)
 	{case 1:
-		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
+		m_gun = new Gun(m_bulletmanager, 30, 10.0f, 2.0f);
 		m_health = 10;
 		m_movespeed = 2.0f;
 		break;
 	case 2:
-		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
+		m_gun = new Gun(m_bulletmanager, 15, 10.0f, 1.0f);
 		m_health = 20;
 		m_movespeed = 1.5f;
 		break;
 	case 3:
-		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
+		m_gun = new Gun(m_bulletmanager, 20, 2.0f, 0.5f);
 		m_health = 30;
 		m_movespeed = 1.0f;
 		break;
 	case 4:
-		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
+		m_gun = new Gun(m_bulletmanager, 20, 10.0f, 1.0f);
 		m_health = 40;
-		m_movespeed = 7.0f;
+		m_movespeed = 1.5f;
 		break;
 	case 5:
-		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
+		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 5.0f);
 		m_health = 50;
 		m_movespeed = 0.0f;
 		break;
@@ -62,10 +63,10 @@ void Monster::Update(float timestep)
 	Moving(timestep);
 	m_boundingBox.SetMin(m_position + m_mesh->GetMin());
 	m_boundingBox.SetMax(m_position + m_mesh->GetMax() + Vector3(0, -0.9, 0));
-	//m_gun->Update(timestep);
+	m_gun->Update(timestep);
 	Vector3 target = Vector3::TransformNormal(Vector3(0, 0, 1), m_rotation);
 	Vector3 bulletPosition = m_position + Vector3(0.09f, 0.6f, 0) + target;
-	//m_gun->Shoot(bulletPosition, target_pos - m_position);
+	m_gun->Shoot(bulletPosition, target_pos - m_position);
 }
 
 void Monster::Render(Direct3D * renderer, Camera * cam)
@@ -86,7 +87,7 @@ void Monster::OnBulletCollisionEnter()
 	}
 }
 
-void Monster::OnBulletCollisionHeadEnter()
+void Monster::OnBulletCollisionHeadEnter()//head sot die immediately
 {
 	m_health = 0;
 	m_isAlive = false;
@@ -114,15 +115,15 @@ void Monster::Moving(float timestep)
 	switch (m_type)
 	{
 	case 1:
-		runway1( timestep);
+		runway1( timestep);//chase player
 		break;
 	case 2:
-		runway2(timestep);
+		runway2(timestep);//far away from player
 		break;
-	case 3:runway3( timestep); break;
+	case 3:runway3( timestep); break;//move to random position
 	case 4:
-		runway4( timestep); break;
-	case 5:runway5( timestep); break;
+		runway4( timestep); break;//always move to front of player
+	case 5:runway5( timestep); break;// don't change position until player is near this enemy
 
 	default:
 		break;
@@ -172,11 +173,7 @@ void Monster::runway4( float timestep)
 {
 	Vector3 dis = m_position-m_faceingpos - target_pos;
 	dis.Normalize();
-	m_position -= dis*timestep*2.0f;
-	
-	
-	
-
+	m_position -= dis*timestep*m_movespeed;
 }
 
 void Monster::runway5( float timestep)

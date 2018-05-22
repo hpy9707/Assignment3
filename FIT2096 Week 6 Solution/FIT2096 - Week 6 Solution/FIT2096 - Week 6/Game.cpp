@@ -169,8 +169,8 @@ void Game::RefreshUI()
 	}
 	std::wstringstream cc;
 	cc << m_player[0]->GetPlayerClip() << " / " << m_player[0]->GetPlayerMagazine();
-	m_state = cc.str();
-	if(m_player[0]->getreload())
+	m_state = cc.str();//this shows clip and maganize
+	if(m_player[0]->getreload())// when reloading it will show on the left corner
 	{
 		std::wstringstream ss;
 
@@ -245,11 +245,11 @@ void Game::Update(float timestep)
 	m_input->BeginUpdate();
 	if (m_input->GetKeyDown(VK_ESCAPE)) {
 		PostQuitMessage(0);
-	}
+	}//can use esp to quit
 	
 	for (unsigned int i =0; i<m_monsterMesh.size(); i++) {
 		
-		if (!m_monsterMesh[i]->IsAlive()) {
+		if (!m_monsterMesh[i]->IsAlive()) {//if dead remove monster
 			delete m_monsterMesh[i];
 			m_monsterMesh.erase(m_monsterMesh.begin()+i);
 			
@@ -257,21 +257,22 @@ void Game::Update(float timestep)
 		else {
 			if (i == 3)
 			{
-				m_monsterMesh[i]->setfacingpos(m_player[0]->GetFacingpos());
-				m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
+				m_monsterMesh[i]->setfacingpos(m_player[0]->GetFacingpos());//I need another vector to make sure one of the monsters should be  
+				m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());// go to front of player
 			}
 			else
-			m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
+			m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());//I don't like to put the whole player into monster What I need
+																	//is just the position
 			
 			m_monsterMesh[i]->Update(timestep);
-			//m_monsterMesh[i]->Moving(timestep, m_player[0]->GetPosition());
+			
 		}
 		
 	}
 
 
 	for (unsigned int i = 0; i <m_capsuleMesh.size() ; i++) {
-		if (!m_capsuleMesh[i]->Getused())
+		if (!m_capsuleMesh[i]->Getused())//after collision the capsule will be set to false and delete the capsule
 		{
 			delete m_capsuleMesh[i];
 			m_capsuleMesh.erase(m_capsuleMesh.begin() + i);
@@ -283,7 +284,7 @@ void Game::Update(float timestep)
 	m_bulletmanager->Update(timestep);
 	m_gameboard->Update(timestep);
 	m_player[0]->Update(timestep);
-	checkgameover();
+	checkgameover();//you kill all monster or you died this will work
 	m_currentCam->SetPosition(m_player[0]->GetPosition() + Vector3(0, 0.75,0));
 	//m_button->Update();
 	RefreshUI();

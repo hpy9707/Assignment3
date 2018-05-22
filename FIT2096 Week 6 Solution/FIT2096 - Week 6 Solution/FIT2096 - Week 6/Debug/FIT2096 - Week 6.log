@@ -1,5 +1,3 @@
-﻿  Monster.cpp
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\monster.cpp(11): warning C4305: 'argument': truncation from 'double' to 'float'
-e:\zuoye\2096\assignment3\fit2096 week 6 solution\fit2096 - week 6 solution\fit2096 - week 6\monster.cpp(64): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  player.cpp
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.exe
   FIT2096 - Week 6.vcxproj -> E:\zuoye\2096\Assignment3\FIT2096 Week 6 Solution\FIT2096 - Week 6 Solution\Debug\FIT2096 - Week 6 Solution.pdb (Full PDB)

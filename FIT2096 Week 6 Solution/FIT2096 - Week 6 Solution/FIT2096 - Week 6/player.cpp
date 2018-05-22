@@ -128,11 +128,7 @@ void Player::Update(float timestep)
 		}
 	}
 
-	//if (didJustMove)
-	//{
-	//	// We want to react once per move (not every frame)
-	//	FinishTurn();
-	//}
+
 }
 
 void Player::OnHealingCollisionEnter()
@@ -144,7 +140,7 @@ void Player::OnHealingCollisionEnter()
 
 void Player::OnBulletCollisionEnter()
 {
-	m_health -= 12;
+	m_health -= 7;
 	
 }
 

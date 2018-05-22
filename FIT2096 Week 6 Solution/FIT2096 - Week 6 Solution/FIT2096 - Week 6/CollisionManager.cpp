@@ -22,10 +22,10 @@ void CollisionManager::CheckCollisions()
 {
 	
 	
-	PlayerToHealthPack();
-	BulletToEnemy();
-	BulletToPlayer();
-	//PlayerToTeleport();
+	PlayerToHealthPack();//check gaining health
+	BulletToEnemy();// damage to enemy
+	BulletToPlayer();// damage to player
+	PlayerToTeleport();//teleport
 	// Move all current collisions into previous
 	memcpy(m_previousCollisions, m_currentCollisions, sizeof(m_currentCollisions));
 
@@ -106,7 +106,7 @@ void CollisionManager::BulletToEnemy()
 				AddCollision(bullet, monster);
 
 				if (!wasColliding) {
-					
+					//checking position of bullet if it is in a range a headshot will occur
 				
 					float y = bullet->GetPosition().y;
 					if (y >= 0.75&&y<0.9)
@@ -167,7 +167,11 @@ void CollisionManager::PlayerToTeleport()
 			bool wasColliding = ArrayContainsCollision(m_previousCollisions, player, tile);
 			if (isColliding) {
 				AddCollision(player, tile);
-
+				/*
+				I use a sheild to protect the teleport only occurs once and 
+				it will be dismissed when enter the area of teleport
+				If not it will continue to teleport
+				*/
 				if (!wasColliding) {
 					if (!player->getTeleport())
 					player->OnTileCollisionEnter();
