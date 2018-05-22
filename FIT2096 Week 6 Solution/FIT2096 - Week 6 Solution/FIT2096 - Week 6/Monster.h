@@ -17,12 +17,13 @@ private:
 	bool m_moving;
 	Vector3 random_position;
 	Vector3 original_position;
-	bool facelocation;
+	Vector3 m_faceingpos;
 	CBoundingBox m_boundingBox;
 	BulletManager* m_bulletmanager;
 	Matrix m_rotation;
 	Gun* m_gun;
 	Vector3 target_pos;
+	bool facelocation;
 	void runway1(float timestep);
 	void runway2(float timestep);
 	void runway3(float timestep);
@@ -39,7 +40,7 @@ public:
 	void LookAt();
 	void Moving(float timestep);
 	void Update(float timestep) ;
-	
+	void setfacingpos(Vector3 facing) { m_faceingpos = facing; }
 	void Render(Direct3D * renderer, Camera * cam);
 	void OnBulletCollisionEnter();
 	void OnBulletCollisionHeadEnter();

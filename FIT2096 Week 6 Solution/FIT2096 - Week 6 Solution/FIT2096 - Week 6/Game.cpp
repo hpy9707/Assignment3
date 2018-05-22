@@ -55,8 +55,9 @@ bool Game::Initialise(Direct3D* renderer, InputController* input)
 	InitGameWorld();
 	RefreshUI();
 	m_collisionManager = new CollisionManager(&m_player, &m_monsterMesh, &m_capsuleMesh,
-		m_bulletmanager->Getbullet());
-		//,m_gameboard->GetAllTileBytype(TileType::TELEPORT));
+		m_bulletmanager->Getbullet()
+	//);
+		,m_gameboard->GetAllTileBytype(TileType::TELEPORT));
 	m_currentCam = new FlyingCamera(m_input, m_player[0]->GetPosition()+Vector3(0,0.75,0));
 	//m_currentCam = new ThirdPersonCamera(m_player, Vector3(0, 10, -25), true, 2.0f);
 
@@ -254,6 +255,12 @@ void Game::Update(float timestep)
 			
 			}
 		else {
+			if (i == 3)
+			{
+				m_monsterMesh[i]->setfacingpos(m_player[0]->GetFacingpos());
+				m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
+			}
+			else
 			m_monsterMesh[i]->SetTarget(m_player[0]->GetPosition());
 			
 			m_monsterMesh[i]->Update(timestep);
@@ -276,7 +283,7 @@ void Game::Update(float timestep)
 	m_bulletmanager->Update(timestep);
 	m_gameboard->Update(timestep);
 	m_player[0]->Update(timestep);
-	//checkgameover();
+	checkgameover();
 	m_currentCam->SetPosition(m_player[0]->GetPosition() + Vector3(0, 0.75,0));
 	//m_button->Update();
 	RefreshUI();

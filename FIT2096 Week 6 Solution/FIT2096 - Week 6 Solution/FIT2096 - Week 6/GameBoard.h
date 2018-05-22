@@ -4,7 +4,7 @@
 #include "Tile.h"
 #include "MeshManager.h"
 #include "TextureManager.h"
-
+#include<vector>
 class GameBoard
 {
 private:
@@ -33,8 +33,8 @@ public:
 	
 	TileType GetTileTypeForPosition(int x, int z);
 	Tile* GetRandomTileOfType(TileType type);
-	std::vector<Tile*>* getalltile() { return &m_shortlist; }//??????
-	//teleport???
+	std::vector<Tile*>* GetAllTileBytype(TileType type);//??????
+	
 
 };
 

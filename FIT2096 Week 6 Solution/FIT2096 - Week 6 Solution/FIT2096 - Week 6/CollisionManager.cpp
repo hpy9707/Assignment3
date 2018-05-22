@@ -2,14 +2,15 @@
 
 CollisionManager::CollisionManager(std::vector<Player*>* players, 
 	std::vector<Monster*>* enemy, std::vector<Healing*>* healthpack, 
-	std::vector<Bullet*>* bullet)
-	//, std::vector<Tile*>* tile)
+	std::vector<Bullet*>* bullet
+//)
+	, std::vector<Tile*>* tile)
 {
 	m_player = players;
 	m_monsters = enemy;
 	m_healings = healthpack;
 	m_bullets = bullet;
-	//m_teleports = tile;
+	m_tiles = tile;
 	// Clear our arrays to 0 (NULL)
 	memset(m_currentCollisions, 0, sizeof(m_currentCollisions));
 	memset(m_previousCollisions, 0, sizeof(m_previousCollisions));
@@ -24,6 +25,7 @@ void CollisionManager::CheckCollisions()
 	PlayerToHealthPack();
 	BulletToEnemy();
 	BulletToPlayer();
+	//PlayerToTeleport();
 	// Move all current collisions into previous
 	memcpy(m_previousCollisions, m_currentCollisions, sizeof(m_currentCollisions));
 
@@ -147,6 +149,35 @@ void CollisionManager::BulletToPlayer()
 					bullet->OnEnemyCollisionEnter();
 				}
 
+			}
+
+		}
+	}
+}
+
+void CollisionManager::PlayerToTeleport()
+{
+	for (unsigned int i = 0; i < m_player->size(); i++) {
+		for (unsigned j = 0; j < m_tiles->size(); j++) {
+			Player* player = (*m_player)[i];
+			Tile* tile = (*m_tiles)[j];
+			CBoundingBox playerBounds = player->GetBounds();
+			CBoundingBox tileBounds = tile->GetBounds();
+			bool isColliding = CheckCollision(playerBounds, tileBounds);
+			bool wasColliding = ArrayContainsCollision(m_previousCollisions, player, tile);
+			if (isColliding) {
+				AddCollision(player, tile);
+
+				if (!wasColliding) {
+					if (!player->getTeleport())
+					player->OnTileCollisionEnter();
+					
+				}
+
+			}
+			else
+			{
+				player->OnTileCollisionExit();
 			}
 
 		}

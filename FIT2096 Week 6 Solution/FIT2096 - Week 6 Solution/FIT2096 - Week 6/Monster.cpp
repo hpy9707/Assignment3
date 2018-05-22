@@ -45,7 +45,7 @@ void Monster::initialproperty(int type)
 	case 4:
 		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
 		m_health = 40;
-		m_movespeed = 0.5f;
+		m_movespeed = 7.0f;
 		break;
 	case 5:
 		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 1.0f);
@@ -59,13 +59,13 @@ void Monster::initialproperty(int type)
 void Monster::Update(float timestep)
 {
 	LookAt();
-	//Moving(timestep);
+	Moving(timestep);
 	m_boundingBox.SetMin(m_position + m_mesh->GetMin());
 	m_boundingBox.SetMax(m_position + m_mesh->GetMax() + Vector3(0, -0.9, 0));
-	m_gun->Update(timestep);
+	//m_gun->Update(timestep);
 	Vector3 target = Vector3::TransformNormal(Vector3(0, 0, 1), m_rotation);
 	Vector3 bulletPosition = m_position + Vector3(0.09f, 0.6f, 0) + target;
-	m_gun->Shoot(bulletPosition, target_pos - m_position);
+	//m_gun->Shoot(bulletPosition, target_pos - m_position);
 }
 
 void Monster::Render(Direct3D * renderer, Camera * cam)
@@ -170,22 +170,11 @@ void Monster::runway3( float timestep)
 
 void Monster::runway4( float timestep)
 {
-	Vector3 dis = original_position - random_position;
+	Vector3 dis = m_position-m_faceingpos - target_pos;
 	dis.Normalize();
-	if (facelocation)
-	{
-		float distance = Vector3::Distance(m_position, random_position);
-		if (distance > 0.1f) 
-			m_position -= dis*timestep*m_movespeed;
-		else
-			facelocation = false;
-	}
-	else {
-		float distance = Vector3::Distance(m_position, original_position);
-		if (distance > 0.1f)
-			m_position += dis*timestep*m_movespeed;
-		else facelocation = true;
-	}
+	m_position -= dis*timestep*2.0f;
+	
+	
 	
 
 }

@@ -50,7 +50,7 @@ TileType Tile::SelectType()
 
 	if (roll <= 80)
 		return TileType::NORMAL;
-	else if (roll > 90)
+	else if (roll > 95)
 		return TileType::TELEPORT;
 	else 
 		return TileType::HEALTH;

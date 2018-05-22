@@ -35,7 +35,7 @@ private:
 	int m_score;
 	int m_monstersDefeated;
 	//bool m_isTrapped;
-	
+	bool teleporting;
 	float m_heading;
 	float m_pitch;
 	float m_rotationSpeed;
@@ -45,7 +45,7 @@ private:
 	void resetpos(Vector3 target_pos);
 	Gun* m_gun;
 	void TeleportToTileOfType(TileType type);
-	
+	Vector3 m_facingposition;
 	
 	
 
@@ -57,8 +57,10 @@ public:
 	void Update(float timestep);
 	void OnHealingCollisionEnter();
 	void OnBulletCollisionEnter();
+	void OnTileCollisionEnter();
+	void OnTileCollisionExit();
 	float GetHealth() { return m_health; }
-
+	Vector3 GetFacingpos() { return  m_facingposition; }
 
 	
 	int GetNumberOfMonstersDefeated() { return m_monstersDefeated; }
@@ -66,7 +68,9 @@ public:
 	int GetPlayerClip();
 	int GetPlayerMagazine();
 	bool getreload() { return m_gun->getreload(); }
+	bool getTeleport() { return teleporting; }
 	CBoundingBox GetBounds() { return m_boundingBox; }
+	
 };
 
 #endif

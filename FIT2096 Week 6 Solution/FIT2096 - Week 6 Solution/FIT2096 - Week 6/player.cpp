@@ -27,7 +27,7 @@ Player::Player(Mesh* mesh, Shader* shader, Texture* texture, InputController* in
 	m_score = 0;
 	m_monstersDefeated = 0;
 	TeleportToTileOfType(TileType::NORMAL);
-	
+	teleporting = false;
 	m_gun = new Gun(bulletmanager, 30, 2.0f, 0.2f);
 }
 
@@ -53,20 +53,12 @@ void Player::Update(float timestep)
 
 	Matrix lookAtRotation = pitch * heading;
 	// Transform a world right vector from world space into local space
-	Vector3 localRight = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
-
-	// Essentially our local forward vector but always parallel with the ground
-	// Remember a cross product gives us a vector perpendicular to the two input vectors
-	Vector3 localForwardXZ = localRight.Cross(Vector3(0, 1, 0));
-
-
-
 	Vector3 right = Vector3::TransformNormal(Vector3(1, 0, 0), heading);
 
 	// Essentially our local forward vector but always parallel with the ground
 	// Remember a cross product gives us a vector perpendicular to the two input vectors
-	Vector3 forward = localRight.Cross(Vector3(0, 1, 0));
-
+	Vector3 forward = right.Cross(Vector3(0, 1, 0));
+	m_facingposition = forward;
 	Vector3 target = Vector3::TransformNormal(Vector3(0, 0, 1), lookAtRotation);
 	// We need to identify the frame input was received so we can perform common logic
 	// outside of the GetKeyDown IF statements below.
@@ -154,6 +146,17 @@ void Player::OnBulletCollisionEnter()
 {
 	m_health -= 12;
 	
+}
+
+void Player::OnTileCollisionEnter()
+{
+	TeleportToTileOfType(TileType::TELEPORT);
+	teleporting = true;
+}
+
+void Player::OnTileCollisionExit()
+{
+	teleporting = false;
 }
 
 
