@@ -59,6 +59,7 @@ public:
 	void OnBulletCollisionEnter();
 	void OnTileCollisionEnter();
 	void OnTileCollisionExit();
+	void OnMonsterCollisionEnter();
 	float GetHealth() { return m_health; }
 	Vector3 GetFacingpos() { return  m_facingposition; }
 

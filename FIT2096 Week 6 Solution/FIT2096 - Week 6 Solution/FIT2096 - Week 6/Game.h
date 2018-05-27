@@ -37,6 +37,7 @@ private:
 	MeshManager* m_meshManager;
 	TextureManager* m_textureManager;
 	CollisionManager* m_collisionManager;
+
 	// Sprites / Fonts
 	SpriteBatch* m_spriteBatch;
 	SpriteFont* m_arialFont12;

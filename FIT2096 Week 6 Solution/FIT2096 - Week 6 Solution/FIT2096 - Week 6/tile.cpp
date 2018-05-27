@@ -87,6 +87,7 @@ void Tile::SetType(TileType type)
 	m_texture = GetTextureForType(m_type);
 	if (m_type == TileType::TELEPORT) {
 		m_CBbox = CBoundingBox(m_position + m_mesh->GetMin(), m_position + m_mesh->GetMax() + Vector3(0, 0.5, 0));//only teleport tile need a cbbox
+	//Also I think the mesh of tile may not contain a collision So I enlarge the bounding
 	}
 }
 

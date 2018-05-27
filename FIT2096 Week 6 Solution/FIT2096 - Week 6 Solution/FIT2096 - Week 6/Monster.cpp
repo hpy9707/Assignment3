@@ -1,5 +1,5 @@
 #include "Monster.h"
-
+#include "MathsHelper.h"
 Monster::Monster()
 {
 	m_health = 20;
@@ -32,27 +32,27 @@ void Monster::initialproperty(int type)
 	switch (type)
 	{case 1:
 		m_gun = new Gun(m_bulletmanager, 30, 10.0f, 2.0f);
-		m_health = 10;
+		m_health =MathsHelper::RandomRange(10,15) ;
 		m_movespeed = 2.0f;
 		break;
 	case 2:
 		m_gun = new Gun(m_bulletmanager, 15, 10.0f, 1.0f);
-		m_health = 20;
+		m_health = MathsHelper::RandomRange(20, 25);
 		m_movespeed = 1.5f;
 		break;
 	case 3:
 		m_gun = new Gun(m_bulletmanager, 20, 2.0f, 0.5f);
-		m_health = 30;
+		m_health = MathsHelper::RandomRange(30, 35);
 		m_movespeed = 1.0f;
 		break;
 	case 4:
 		m_gun = new Gun(m_bulletmanager, 20, 10.0f, 1.0f);
-		m_health = 40;
+		m_health = MathsHelper::RandomRange(40, 45);
 		m_movespeed = 1.5f;
 		break;
 	case 5:
 		m_gun = new Gun(m_bulletmanager, 5, 10.0f, 5.0f);
-		m_health = 50;
+		m_health = MathsHelper::RandomRange(50, 55);
 		m_movespeed = 0.0f;
 		break;
 
@@ -83,7 +83,7 @@ void Monster::Render(Direct3D * renderer, Camera * cam)
 
 void Monster::OnBulletCollisionEnter()
 {
-	m_health -= 7;
+	m_health -= MathsHelper::RandomRange(5,10);
 	if (m_health < 0) {
 		m_isAlive = false;
 	}

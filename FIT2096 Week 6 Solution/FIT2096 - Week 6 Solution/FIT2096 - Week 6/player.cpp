@@ -140,19 +140,26 @@ void Player::OnHealingCollisionEnter()
 
 void Player::OnBulletCollisionEnter()
 {
-	m_health -= 7;
+	m_health -= (5,13);//consider player's hp is 100 increase a little about damage 
 	
 }
 
 void Player::OnTileCollisionEnter()
 {
 	TeleportToTileOfType(TileType::TELEPORT);
-	teleporting = true;
+	teleporting = true;//set the sheild on in order to prevent infinity teleporting
 }
 
 void Player::OnTileCollisionExit()
 {
 	teleporting = false;
+}
+
+void Player::OnMonsterCollisionEnter()
+{
+	m_health -=20;//I have tested if monster kill playe when colliding It is a stupid design. 
+	// Because the monster don't give you the  time to react  I also test adding pause function. 
+	//It cannot help player to react as well. So I just decrease 20HP.
 }
 
 

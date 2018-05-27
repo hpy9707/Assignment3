@@ -23,9 +23,10 @@ void CollisionManager::CheckCollisions()
 	
 	
 	PlayerToHealthPack();//check gaining health
-	BulletToEnemy();// damage to enemy
+	BulletToMonster();// damage to enemy
 	BulletToPlayer();// damage to player
 	PlayerToTeleport();//teleport
+	playerToMonster();
 	// Move all current collisions into previous
 	memcpy(m_previousCollisions, m_currentCollisions, sizeof(m_currentCollisions));
 
@@ -90,7 +91,7 @@ void CollisionManager::PlayerToHealthPack() {
 	}
 }
 
-void CollisionManager::BulletToEnemy()
+void CollisionManager::BulletToMonster()
 {
 	for (unsigned int i = 0; i < m_monsters->size(); i++) {
 		for (unsigned j = 0; j < m_bullets->size(); j++) {
@@ -182,6 +183,31 @@ void CollisionManager::PlayerToTeleport()
 			else
 			{
 				player->OnTileCollisionExit();
+			}
+
+		}
+	}
+}
+
+void CollisionManager::playerToMonster()
+{
+	for (unsigned int i = 0; i < m_player->size(); i++) {
+		for (unsigned j = 0; j < m_monsters->size(); j++) {
+			Player* player = (*m_player)[i];
+			Monster* monster = (*m_monsters)[j];
+			CBoundingBox playerBounds = player->GetBounds();
+			CBoundingBox monsterBounds = monster->GetBounds();
+			bool isColliding = CheckCollision(playerBounds, monsterBounds);
+			bool wasColliding = ArrayContainsCollision(m_previousCollisions, player, monster);
+			if (isColliding) {
+				AddCollision(player, monster);
+
+				if (!wasColliding) {
+
+					player->OnMonsterCollisionEnter();
+					
+				}
+
 			}
 
 		}

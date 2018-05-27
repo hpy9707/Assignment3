@@ -28,9 +28,10 @@ private:
 
 	
 	void PlayerToHealthPack();
-	void BulletToEnemy();
+	void BulletToMonster();
 	void BulletToPlayer();
 	void PlayerToTeleport();
+	void playerToMonster();
 public:
 	CollisionManager(std::vector<Player*>* players,
 		std::vector<Monster*>* enemy, 
